@@ -6,11 +6,10 @@ Ext.application({
 	name: 'ScrumTool',
     appFolder: 'resources/js/app',
     requires: ['ScrumTool.view.Viewport', 'ScrumTool.view.Login'],
-    //autoCreateViewport: true,
 
     
     models: ['Menu'],
-    stores: ['Menus'],
+    stores: ['Menus', 'Sprints'],
     controllers: ['Login', 'Story'],
     
     launch: function() {

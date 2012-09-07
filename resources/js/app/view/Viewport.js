@@ -5,7 +5,8 @@ Ext.define('ScrumTool.view.Viewport', {
 	requires: [
 	    'ScrumTool.view.MenuList',
 	    'ScrumTool.view.StoryGrid',
-	    'ScrumTool.view.EditStory'
+	    'ScrumTool.view.EditStory',
+	    'ScrumTool.view.SprintGrid',
 	],
 	
 	layout: 'fit',
@@ -57,6 +58,8 @@ Ext.define('ScrumTool.view.Viewport', {
 				flex: 1,
 				items: [{
 					xtype: 'storygrid'
+				}, {
+					xtype: 'sprintgrid'
 				}]
 			}]
 		};
