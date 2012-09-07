@@ -15,4 +15,5 @@ Ext.define('ScrumTool.model.Story', {
 		}         
 	]
 
+
 });
