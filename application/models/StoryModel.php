@@ -1,0 +1,85 @@
+<?php
+
+use models\dao\CategoryDAO;
+
+use models\dao\ProjectDAO;
+
+use models\entities\Category;
+
+use models\entities\Story;
+
+use models\dao\StoryDAO;
+
+use models\dao\UserDAO;
+
+/**
+ * @property StoryDAO $storyDAO
+ * @property ProjectDAO $projectDAO
+ * @property UserDAO $userDAO
+ * @author Rafael
+ *
+ */
+class StoryModel extends CI_Model {
+	
+	private $storyDAO;
+	private $userDAO;
+	private $projectDAO;
+	private $categoryDAO;
+	
+	public function __construct() {
+		parent::__construct();
+		$this->storyDAO = new StoryDAO($this->doctrine->em);
+		$this->projectDAO = new ProjectDAO($this->doctrine->em);
+		$this->userDAO = new UserDAO($this->doctrine->em);
+		$this->categoryDAO = new CategoryDAO($this->doctrine->em);
+	}
+	
+	public function findByPrimaryKey($id) {
+		return $this->storyDAO->findByPrimaryKey($id);
+	}
+	
+	public function findAll() {
+		return $this->storyDAO->findAll();
+	}
+	
+	public function save($data) {
+		$story = new Story();
+		
+		if (!empty($data['id'])) {
+			$story->setId($data['id']);
+		}
+		$story->setDescription(htmlentities(nl2br($data['description'])));
+		$story->setName($data['name']);
+		$story->setPoint($data['point']);
+		$story->setStatus($data['status']);
+		$story->setCreateAt(new DateTime());
+		$story->setUser($this->userDAO->findByPrimaryKey(1));
+		$story->setProject($this->projectDAO->findByPrimaryKey(1));
+		$story->setCategory($this->categoryDAO->findByPrimaryKey($data['category']));
+		
+		$this->storyDAO->save($story);
+		
+		return $story;
+		
+	}
+	
+	public function saveTest() {
+		$cat = $this->storyDAO->findByPrimaryKey("models\entities\Category", 1);
+		$user = $this->storyDAO->findByPrimaryKey("models\entities\User", 1);
+		$project = $this->storyDAO->findByPrimaryKey("models\entities\Project", 1);
+		
+		$story = new Story();
+		
+		
+		$story->setUser($user);
+		$story->setCategory($cat);
+		$story->setDescription("");
+		$story->setName("Nova teste");
+		$story->setPoint(8);
+		$story->setProject($project);
+		$story->setStatus("");
+		
+		$this->storyDAO->save($story);
+	}
+
+}

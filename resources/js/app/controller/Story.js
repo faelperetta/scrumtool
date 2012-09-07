@@ -1,0 +1,72 @@
+Ext.define('ScrumTool.controller.Story', {
+	extend: 'Ext.app.Controller',
+	
+	stores: ['Stories', 'Categories'],
+		
+	refs: [{
+		ref: 'storyGrid', selector: 'storygrid'
+	}],
+	
+	init: function() {
+		this.control({
+			'storygrid': {
+				afterrender: this.onAfterRenderStoryGrid
+			},
+			
+			'storygrid actioncolumn': {
+				click: function(grid, metaData, rowIndex) {
+					var storyWindow = Ext.widget('editstory', {title: 'Editar História'});
+					storyWindow.show();
+					var record = grid.getStore().getAt(rowIndex);
+					storyWindow.down('form').loadRecord(record);
+				}
+			},
+			
+			'storygrid > toolbar > button[action=newStory]': {
+				click: this.onNewStory
+			},
+			
+			'button[action=save]': {
+				click: this.onSaveStory
+			}
+		});
+	},
+	
+	/**
+	 * Metodo que carrega as historias depois que o grid for renderizado.
+	 */
+	onAfterRenderStoryGrid: function() {
+		this.getStoriesStore().load();
+	},
+	
+	/**
+	 * Metodo que abre a window com o formulario para cadastro de uma historia.
+	 */
+	onNewStory: function() {
+		var storyWindow = Ext.widget('editstory', {title: 'Nova História'});
+		storyWindow.show();
+	},
+	
+	/**
+	 * Metodo que salva uma historia.
+	 */
+	onSaveStory: function(button) {
+		var window    = button.up('window'),
+        form   = window.down('form'),
+        record = form.getRecord(),
+        values = form.getValues();
+	
+        if (record == null) {
+        	record = Ext.create('ScrumTool.model.Story');
+        	record.set(values);
+        	this.getStoriesStore().add(record);        	
+        }  else {        	
+        	record.set(values);
+        	console.log(record.data);
+        }
+        
+		this.getStoriesStore().sync();
+		
+		window.close();
+	}
+});
