@@ -8,6 +8,7 @@ Ext.define('ScrumTool.store.Sprints', {
 		method: 'post',
 		
 		api: {
+			create: 'sprints/save',
 			read: 'sprints/all'
 		},
 
@@ -22,8 +23,5 @@ Ext.define('ScrumTool.store.Sprints', {
 		    encode: true,
 		    root: 'data'
 		}
-	},
-	
-	autoLoad: true
-	
+	}	
 });

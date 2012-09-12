@@ -5,7 +5,6 @@ Ext.define('ScrumTool.model.Story', {
 	    {
 			name: 'category',
 			convert: function(v) {
-				console.log(v);
 				if (typeof v == "object") {
 					return v.id;					
 				} else {

@@ -1,5 +1,7 @@
 <?php
  
+use models\entities\Sprint;
+
 use models\dao\SprintDAO;
 
 /**
@@ -24,8 +26,12 @@ class SprintModel extends CI_Model {
 		return $this->sprintDAO->findAll();
 	}
 	
-	public function save($sprint) {
+	public function save($data) {
+		$sprint = new Sprint();
+		$sprint->setName($data['name']);
+		
 		$this->sprintDAO->save($sprint);
+		return $sprint;
 	}
 	
 	public function delete($sprint) {

@@ -9,8 +9,8 @@ Ext.application({
 
     
     models: ['Menu'],
-    stores: ['Menus', 'Sprints'],
-    controllers: ['Login', 'Story'],
+    stores: ['Menus'],
+    controllers: ['Login', 'Story', 'Sprint'],
     
     launch: function() {
     	var me = this;

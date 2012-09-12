@@ -38,11 +38,10 @@ class Sprints extends CI_Controller {
 	}
 	
 	
-	public function testSave() {
-		$sprint = new Sprint();
-		$sprint->setName("Sprint 1");
-		
-		echo $sprint->getId() . ' - ' . $sprint->getName();
+	public function save() {
+		$data = (array) json_decode($_POST['data']);
+		$sprint = $this->sprintModel->save($data);
+		$this->utils->returnsSuccess($sprint);
 	}
 	
 }

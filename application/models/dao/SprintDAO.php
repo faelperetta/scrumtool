@@ -16,7 +16,7 @@ class SprintDAO extends GenericDAO {
 		return parent::findAll(self::$ENTITY);
 	}
 	
-	public function save(Sprint $sprint) {
+	public function save($sprint) {
 		parent::save($sprint);
 	}
 	
