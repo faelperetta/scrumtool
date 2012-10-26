@@ -3,8 +3,8 @@ Ext.define('ScrumTool.view.SprintGrid', {
 	alias: 'widget.sprintgrid',
 	
 	store: 'Sprints',
+	id: 'sprintGrid',
 	
-	title: 'Sprint',
 	border: false,
 	
 	initComponent: function() {
@@ -22,6 +22,19 @@ Ext.define('ScrumTool.view.SprintGrid', {
 			text: 'Titulo',
 			dataIndex: 'name',
 			flex: 1
+		}, {
+			xtype: 'actioncolumn',
+			width: 45,
+			items: [{
+				icon: 'resources/images/edit.png',
+				tooltip: 'Editar',
+				handler: function(grid, rowIndex, colIndex) {
+					Ext.getCmp('sprintGrid').fireEvent('editsprint', grid, rowIndex, colIndex);
+				}
+			},{
+				icon: 'resources/images/delete.png',
+				tooltip: 'Excluir'
+			}]
 		}];
 		
 		this.callParent(arguments);

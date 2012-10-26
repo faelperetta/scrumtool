@@ -8,6 +8,7 @@ Ext.define('ScrumTool.view.StoryGrid', {
 	alias: 'widget.storygrid',
 	
 	store: 'Stories',
+	id: 'storyGrid',
 	
 	title: 'Product Backlog',
 	border: false,
@@ -58,10 +59,16 @@ Ext.define('ScrumTool.view.StoryGrid', {
 			width: 200
 		}, {
 			xtype: 'actioncolumn',
-			width: 50,
+			width: 45,
 			items: [{
-				icon: 'resources/images/post.gif',
-				tooltip: 'Editar'
+				icon: 'resources/images/edit.png',
+				tooltip: 'Editar',
+				handler: function(grid, rowIndex, colIndex) {
+					Ext.getCmp('storyGrid').fireEvent('editstory', grid, rowIndex, colIndex);
+				}
+			},{
+				icon: 'resources/images/delete.png',
+				tooltip: 'Excluir'
 			}]
 		}];
 		

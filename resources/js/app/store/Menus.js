@@ -4,15 +4,19 @@ Ext.define('ScrumTool.store.Menus', {
 	
 	data: [{
 		id: 1,
-		name: 'Projetos'
+		name: 'Projetos',
+		type: ''
 	}, {
 		id: 2,
-		name: 'Backlog'
+		name: 'Backlog',
+		type: 'storygrid'
 	},{
 		id: 3,
-		name: 'Sprints'
+		name: 'Sprints',
+		type: 'sprintmanagement'
 	}, {
 		id: 4,
-		name: 'Users'
+		name: 'Users',
+		type: ''
 	}]
 });

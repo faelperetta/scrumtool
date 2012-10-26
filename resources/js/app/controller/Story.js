@@ -10,16 +10,8 @@ Ext.define('ScrumTool.controller.Story', {
 	init: function() {
 		this.control({
 			'storygrid': {
-				afterrender: this.onAfterRenderStoryGrid
-			},
-			
-			'storygrid actioncolumn': {
-				click: function(grid, metaData, rowIndex) {
-					var storyWindow = Ext.widget('editstory', {title: 'Editar História'});
-					storyWindow.show();
-					var record = grid.getStore().getAt(rowIndex);
-					storyWindow.down('form').loadRecord(record);
-				}
+				afterrender: this.onAfterRenderStoryGrid,
+				editstory: this.onEditStory
 			},
 			
 			'storygrid > toolbar > button[action=newStory]': {
@@ -69,5 +61,12 @@ Ext.define('ScrumTool.controller.Story', {
 		this.getStoriesStore().sync();
 		
 		window.close();
+	},
+	
+	onEditStory: function(grid, rowIndex, colIndex) {
+		var storyWindow = Ext.widget('editstory', {title: 'Editar História'});
+		storyWindow.show();
+		var record = grid.getStore().getAt(rowIndex);
+		storyWindow.down('form').loadRecord(record);
 	}
 });

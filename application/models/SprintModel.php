@@ -28,6 +28,9 @@ class SprintModel extends CI_Model {
 	
 	public function save($data) {
 		$sprint = new Sprint();
+		if (!empty($data['id'])) {
+			$sprint->setId($data['id']);
+		}
 		$sprint->setName($data['name']);
 		
 		$this->sprintDAO->save($sprint);

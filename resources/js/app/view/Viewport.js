@@ -6,7 +6,9 @@ Ext.define('ScrumTool.view.Viewport', {
 	    'ScrumTool.view.MenuList',
 	    'ScrumTool.view.StoryGrid',
 	    'ScrumTool.view.EditStory',
+	    'ScrumTool.view.SprintManagement',
 	    'ScrumTool.view.SprintGrid',
+	    'ScrumTool.view.SprintDetail'
 	],
 	
 	layout: 'fit',
@@ -55,12 +57,8 @@ Ext.define('ScrumTool.view.Viewport', {
 				}]
 			}, {
 				xtype: 'tabpanel',
-				flex: 1,
-				items: [{
-					xtype: 'storygrid'
-				}, {
-					xtype: 'sprintgrid'
-				}]
+				id: 'tabContainer',
+				flex: 1
 			}]
 		};
 		

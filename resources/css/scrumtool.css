@@ -1,12 +1,3 @@
-.appHeader {
-	
-}
-
-#apptitle {
-	
-}
-
-
 .story-grid .x-grid-rowbody {
     margin: 5px 20px 10px 25px !important;
     color: #555;
@@ -27,3 +18,59 @@
 .author {
 	color: #333; 
 }
+
+/* Sprint Styles */
+* {
+font-family: arial;
+}
+
+.sprintHeader {
+    margin: 10px;
+    border-bottom: solid 2px #CCC;
+}
+
+.sprintTitle {
+    padding:10px;
+    background: #333;
+    color: #FFF;
+    float:left;
+}
+
+#sprintInfoContainer {
+	display: block;
+	margin:10px;
+}
+
+#sprintInfoContainer h1 {
+	font-size: 20px;
+	color: #333333;
+	float:left;
+}
+
+#sprintHeader {
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+.sprintDateRange {
+	font-size: 11px;
+	color: #555;
+	width:200;
+	float:right;
+	margin-top: 10px;
+}
+
+table.sprintDetail {
+    width: 100%;
+    border: solid 1px #EAEAEA;
+}
+table.sprintDetail td{
+    border-bottom: solid 1px #EAEAEA;
+    padding:5px;
+    font-size:12px;
+}
+
+table.sprintDetail td.value {
+	width:30px;
+	text-align: center;
+}​

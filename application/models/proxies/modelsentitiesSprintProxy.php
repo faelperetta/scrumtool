@@ -36,6 +36,12 @@ class modelsentitiesSprintProxy extends \models\entities\Sprint implements \Doct
     }
     
     
+    public function setId($id)
+    {
+        $this->__load();
+        return parent::setId($id);
+    }
+
     public function getId()
     {
         $this->__load();
