@@ -1,4 +1,3 @@
-var tab = '';
 Ext.define('ScrumTool.controller.Menu', {
 	extend: 'Ext.app.Controller',
 	
