@@ -2,6 +2,7 @@ Ext.define('ScrumTool.view.SprintDetail', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.sprintdetail',
 	data: {name: 'Sprint 1'},
+	padding: 10,
 	
 	initComponent: function() {
 		Ext.apply(this, {
@@ -34,7 +35,7 @@ Ext.define('ScrumTool.view.SprintDetail', {
 			    {
 					storiesCount: function(stories) {
 						//console.log(stories);
-						return stories == "" ? 0 :stories.length;
+						return stories == null ? 0 :stories.length;
 					},
 					
 					totalPoints: function(stories) {
