@@ -1,7 +1,8 @@
 Ext.define('ScrumTool.view.SprintManagement', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.sprintmanagement',
-	title: 'Sprint',
+	title: 'Gerenciamento de Sprints',
+	bodyStyle: 'background: #FFF',
 	
 	initComponent: function() {
 		var me = this;
@@ -9,15 +10,22 @@ Ext.define('ScrumTool.view.SprintManagement', {
 		me.layout = 'border';
 		
 		me.defaults = {
-			flex: 1
+			split: true
 		};
 
 		me.items = [{
 			xtype: 'sprintgrid',
-			region: 'center'
+			region: 'west',
+			collapsible: true
 		},{
-			xtype: 'sprintdetail',
-			region: 'east'
+			xtype: 'container',
+			region: 'center',	
+			flex: 1,
+			items: [{
+				xtype: 'sprintdetail'
+			}, {
+				xtype: 'sprintbackloglist'
+			}]
 		}];
 		
 		me.callParent(arguments);
