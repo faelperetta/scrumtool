@@ -4,8 +4,9 @@ Ext.define('ScrumTool.view.SprintGrid', {
 	
 	store: 'Sprints',
 	id: 'sprintGrid',
-	
-	border: false,
+	title: 'Sprints',
+	width: 500,
+	margin:10,
 	
 	initComponent: function() {
 		var me = this;
