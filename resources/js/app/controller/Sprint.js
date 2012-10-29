@@ -1,7 +1,7 @@
 Ext.define('ScrumTool.controller.Sprint', {
 	extend: 'Ext.app.Controller',
 	
-	stores: ['Sprints'],
+	stores: ['Sprints', 'Tasks'],
 	
 	views: ['EditSprint'],
 	
@@ -26,12 +26,6 @@ Ext.define('ScrumTool.controller.Sprint', {
 			
 			'editsprint > toolbar > button[action=save]': {
 				click: this.onSaveSprint
-			},
-			
-			'grid[id=gridBacklogItemsToSel]': {
-				render: function() {
-					console.log('On Render Grid');
-				}
 			}
 			
 			
@@ -58,11 +52,9 @@ Ext.define('ScrumTool.controller.Sprint', {
         	record = Ext.create('ScrumTool.model.Sprint');
         	values.stories = this.getExtractStories(this.getSprintBacklogGrid().getStore().getRange());
         	record.set(values);
-        	console.log(record.data);
         	this.getSprintsStore().add(record);        	
         }  else {        	
         	record.set(values);
-        	console.log(record.data);
         }
         
 		//this.getSprintsStore().sync();
@@ -83,10 +75,29 @@ Ext.define('ScrumTool.controller.Sprint', {
 		sprintWindow.show();
 		var record = grid.getStore().getAt(rowIndex);
 		sprintWindow.down('form').loadRecord(record);
+		
+		stories = record.data.stories;
+		
+		for (var i = 0; i < stories.length; i++) {
+			this.getSprintBacklogGrid().getStore().add(stories[i]);
+		}
 	},
 	
 	onSelectGritItem: function(rowModel, record, index) {
 		this.getSprintDetail().setActive(record);
+		this.fillStoreGrid(record.get('stories'));
+	},
+	
+	/**
+	 * TODO verificar se metodo ainda sera necessario apos a implementacao da logico lado servidor.
+	 * @param stories
+	 */
+	fillStoreGrid: function(stories) {
+		if (stories != null) {
+			for(var i = 0; i < stories.length; i++) {
+				this.getTasksStore().add({storyName: stories[i].name, description: null});
+			}
+		}
 	}
 	
 	
