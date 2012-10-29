@@ -8,7 +8,9 @@ Ext.define('ScrumTool.view.Viewport', {
 	    'ScrumTool.view.EditStory',
 	    'ScrumTool.view.SprintManagement',
 	    'ScrumTool.view.SprintGrid',
-	    'ScrumTool.view.SprintDetail'
+	    'ScrumTool.view.SprintDetail',
+	    'ScrumTool.view.SprintBacklogList',
+	    'ScrumTool.view.EditTask'
 	],
 	
 	layout: 'fit',
