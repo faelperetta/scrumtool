@@ -2,7 +2,7 @@ Ext.define('ScrumTool.view.SprintBacklogList', {
 	extend: 'Ext.grid.Panel',
 	alias: 'widget.sprintbackloglist',
 	title: 'Sprint Backlog',
-	hideHeaders: true,
+	//hideHeaders: true,
 	padding:10,
 	
 	initComponent: function() {
@@ -29,14 +29,19 @@ Ext.define('ScrumTool.view.SprintBacklogList', {
 		
 		me.viewConfig = {
 			getRowClass: function(rec) {
-            	console.log(rec);
-            	if (rec.data.description == null) return 'x-hide-display';
+            	return rec.data.description == null ? 'x-hide-display' : '';
             }
 		},
 		
 		me.columns = [{
+			text: 'Tarefa',
 			dataIndex: 'description',
 			flex:1
+		}, {
+			text: 'Horas',
+			dataIndex: 'hours',
+			width: 40,
+			align: 'center'
 		}];
 		
 		me.callParent(arguments);
