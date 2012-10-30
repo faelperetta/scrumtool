@@ -5,7 +5,7 @@ Ext.define('ScrumTool.store.Menus', {
 	data: [{
 		id: 1,
 		name: 'Projetos',
-		type: ''
+		type: 'projectgrid'
 	}, {
 		id: 2,
 		name: 'Backlog',
