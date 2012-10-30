@@ -4,6 +4,8 @@ Ext.define('ScrumTool.view.EditTask', {
 	alias: 'widget.edittask',
 	bodyStyle: 'background: #FFF',
 	modal: true,
+	width: 400,
+	resizable: false,
 	
 	initComponent: function() {
 		
@@ -15,6 +17,12 @@ Ext.define('ScrumTool.view.EditTask', {
 			layout: 'anchor',
 			border: false,
 			plain: true,
+			
+			fieldDefaults: {
+	            anchor: '100%',
+	            labelAlign: 'top'
+	        },
+	        
 			items: [{
 				xtype: 'combobox',
 				fieldLabel: 'História',
