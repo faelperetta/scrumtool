@@ -42,6 +42,10 @@ class Project
      */
     private $createAt;
 
+    
+    public function setId($id) {
+    	$this->id = $id;
+    }
 
     /**
      * Get id
