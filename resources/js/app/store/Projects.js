@@ -9,7 +9,8 @@ Ext.define('ScrumTool.store.Projects', {
 		
 		api: {
 			create: 'projects/save',
-			read: 'projects/all'
+			read: 'projects/all',
+			update: 'projects/save'
 		},
 		
 		reader: {
