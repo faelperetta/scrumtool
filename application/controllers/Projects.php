@@ -2,6 +2,7 @@
 
 /**
  * @property ProjectModel $projectModel
+ * @property Utils $utils
  * @author Rafael
  *
  */
@@ -14,11 +15,10 @@ class Projects extends CI_Controller {
 		$this->load->model("ProjectModel", "projectModel");
 	}
 	
-	public function index() {
-		$projectList = $this->projectModel->findAll();
-		foreach ($projectList as $project) {
-			echo $project->getId() . ' - ' . $project->getName() . '<br />';
-		}
+	public function all() {
+		$projects = $this->projectModel->findAll();
+		echo $this->utils->returnsSuccess($projects);
+		
 	}
 	
 	public function testSave() {
