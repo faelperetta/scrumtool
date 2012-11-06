@@ -112,4 +112,12 @@ class Project
     {
         return $this->createAt;
     }
+    
+    public function toArray() {
+    	return array(
+    			'id' => $this->id,
+    			'name' => $this->name,
+    			'description' => $this->description	
+    		);
+    }
 }
