@@ -64,8 +64,10 @@ Ext.define('ScrumTool.controller.Task', {
 	fillStoryCombo: function(stories) {
 		var store = this.getCboStory().getStore(),
 		record = null;
+
+		store.removeAll();
 		
-		if (stories != null && store.count() == 0) {
+		if (stories != null) {
 			for (var i = 0; i < stories.length; i++) {
 				record = Ext.create('ScrumTool.model.Story');
 				record.set(stories[i]);
