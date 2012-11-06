@@ -36,6 +36,12 @@ class modelsentitiesProjectProxy extends \models\entities\Project implements \Do
     }
     
     
+    public function setId($id)
+    {
+        $this->__load();
+        return parent::setId($id);
+    }
+
     public function getId()
     {
         $this->__load();
@@ -76,6 +82,12 @@ class modelsentitiesProjectProxy extends \models\entities\Project implements \Do
     {
         $this->__load();
         return parent::getCreateAt();
+    }
+
+    public function toArray()
+    {
+        $this->__load();
+        return parent::toArray();
     }
 
 
