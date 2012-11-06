@@ -21,11 +21,10 @@ class Projects extends CI_Controller {
 		
 	}
 	
-	public function testSave() {
-		$project = new Project();
-		$project->setName("ScrumTool");
-		$this->projectModel->save($project);		
-		echo $project->getId() . ' - ' . $project->getName() . '<br />';
+	public function save() {
+		$data = (array) json_decode($_POST['data']);
+		$project = $this->projectModel->save($data);
+		echo $this->utils->returnsSuccess($project);
 	}
 	
 }
