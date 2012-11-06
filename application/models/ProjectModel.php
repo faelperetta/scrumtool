@@ -1,5 +1,7 @@
 <?php
 
+use models\entities\Project;
+
 use models\dao\ProjectDAO;
 
 /**
@@ -24,8 +26,20 @@ class ProjectModel extends CI_Model {
 		return $this->projectDAO->findAll();
 	}
 	
-	public function save($project) {
+	public function save($data) {
+		$project = new Project();
+		
+		if (!empty($data['id'])) {
+			$project->setId($data['id']);
+		}
+		
+		$project->setName($data['name']);
+		$project->setDescription($data['description']);
+		$project->setCreateAt(new DateTime());
+		
 		$this->projectDAO->save($project);
+		
+		return $project;
 	}
 	
 	public function delete($project) {
