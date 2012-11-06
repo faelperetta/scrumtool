@@ -43,7 +43,6 @@ Ext.define('ScrumTool.controller.Story', {
 	 * Metodo que salva uma historia.
 	 */
 	onSaveStory: function(button) {
-		console.log('UHuAshaushuahsa');
 		var window    = button.up('window'),
         form   = window.down('form'),
         record = form.getRecord(),
@@ -55,7 +54,6 @@ Ext.define('ScrumTool.controller.Story', {
         	this.getStoriesStore().add(record);        	
         }  else {        	
         	record.set(values);
-        	console.log(record.data);
         }
         
 		this.getStoriesStore().sync();
