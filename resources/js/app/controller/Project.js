@@ -38,6 +38,8 @@ Ext.define('ScrumTool.controller.Project', {
         }  else {        	
         	record.set(values);
         }
+        
+        this.getProjectsStore().sync();
        		
 		window.close();
 	},
