@@ -7,7 +7,8 @@ Ext.define('ScrumTool.controller.Project', {
 		this.control({
 			'projectgrid': {
 				editproject: this.onEditProject,
-				removeproject: this.onRemoveProject
+				removeproject: this.onRemoveProject,
+				beforerender: this.onBeforeRender
 			},
 			
 			'projectgrid > toolbar > button[action=newProject]': {
@@ -23,6 +24,10 @@ Ext.define('ScrumTool.controller.Project', {
 	onNewProject: function() {
 		var projectWindow = Ext.widget('editproject', {title: 'Novo Projeto'});
 		projectWindow.show();
+	},
+	
+	onBeforeRender: function() {
+		this.getProjectsStore().load();		
 	},
 	
 	onSaveProject: function(button) {
@@ -52,7 +57,6 @@ Ext.define('ScrumTool.controller.Project', {
 	},
 	
 	onRemoveProject: function(grid, rowIndex, colIndex) {
-		console.log(rowIndex);
 		grid.getStore().removeAt(rowIndex);
 	}
 });
