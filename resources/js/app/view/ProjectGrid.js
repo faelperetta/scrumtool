@@ -37,7 +37,11 @@ Ext.define('ScrumTool.view.ProjectGrid', {
 				icon: 'resources/images/delete.png',
 				tooltip: 'Excluir',
 				handler: function(grid, rowIndex, colIndex) {
-					Ext.getCmp('projectGrid').fireEvent('removeproject', grid, rowIndex, colIndex);
+					Ext.MessageBox.confirm('Confirmar', 'Tem certeza que deseja excluir este projeto?', function(btn) {
+						if (btn == 'yes') {
+							Ext.getCmp('projectGrid').fireEvent('removeproject', grid, rowIndex, colIndex);
+						}
+					});
 				}
 			}]
 		}];

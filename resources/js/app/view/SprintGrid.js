@@ -34,7 +34,14 @@ Ext.define('ScrumTool.view.SprintGrid', {
 				}
 			},{
 				icon: 'resources/images/delete.png',
-				tooltip: 'Excluir'
+				tooltip: 'Excluir',
+				handler: function(grid, rowIndex, colIndex) {
+					Ext.MessageBox.confirm('Confirmar', 'Tem certeza que deseja excluir esta sprint?', function(btn) {
+						if (btn == 'yes') {
+							Ext.getCmp('sprintGrid').fireEvent('removesprint', grid, rowIndex, colIndex);							
+						}
+					});
+				}
 			}]
 		}];
 		

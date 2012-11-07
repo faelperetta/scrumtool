@@ -68,7 +68,14 @@ Ext.define('ScrumTool.view.StoryGrid', {
 				}
 			},{
 				icon: 'resources/images/delete.png',
-				tooltip: 'Excluir'
+				tooltip: 'Excluir',
+				handler: function(grid, rowIndex, colIndex) {
+					Ext.MessageBox.confirm('Confirmar', 'Tem certeza que deseja excluir este item do backlog?', function(btn) {
+						if (btn == 'yes') {
+							Ext.getCmp('storyGrid').fireEvent('removestory', grid, rowIndex, colIndex);							
+						}
+					});
+				}
 			}]
 		}];
 		
