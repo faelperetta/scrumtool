@@ -15,10 +15,15 @@ class Users extends CI_Controller {
 		$this->load->model('UserModel', 'userModel');
 	}
 	
-	public function index() {
+	public function all() {
 		$userList = $this->userModel->findAll();
-		
-		echo $this->utils->jsonEncode($userList);
+		echo $this->utils->returnsSuccess($userList);
+	}
+	
+	public function save() {
+		$data = (array) json_decode($_POST['data']);
+		$user = $this->userModel->save($data);
+		echo $this->utils->returnsSuccess($user);
 	}
 	
 	public function login() {
