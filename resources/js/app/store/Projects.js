@@ -24,7 +24,6 @@ Ext.define('ScrumTool.store.Projects', {
 		    encode: true,
 		    root: 'data',
 		}
-	},
-	
-	autoLoad: true
-})
+	}
+
+});
