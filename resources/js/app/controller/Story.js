@@ -11,7 +11,8 @@ Ext.define('ScrumTool.controller.Story', {
 		this.control({
 			'storygrid': {
 				afterrender: this.onAfterRenderStoryGrid,
-				editstory: this.onEditStory
+				editstory: this.onEditStory,
+				removestory: this.onRemoveStory
 			},
 			
 			'storygrid > toolbar > button[action=newStory]': {
@@ -66,5 +67,9 @@ Ext.define('ScrumTool.controller.Story', {
 		storyWindow.show();
 		var record = grid.getStore().getAt(rowIndex);
 		storyWindow.down('form').loadRecord(record);
+	},
+	
+	onRemoveStory: function(grid, rowIndex, colIndex) {
+		this.getStoriesStore().removeAt(rowIndex);
 	}
 });
