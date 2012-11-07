@@ -17,7 +17,8 @@ Ext.define('ScrumTool.controller.Sprint', {
 			'sprintgrid': {
 				afterrender: this.onAfterRenderSprintGrid,
 				editsprint: this.onEditSprint,
-				select: this.onSelectGritItem
+				select: this.onSelectGritItem,
+				removesprint: this.onRemoveSprint
 			},
 			
 			'sprintgrid > toolbar > button[action=newSprint]': {
@@ -57,7 +58,7 @@ Ext.define('ScrumTool.controller.Sprint', {
         	record.set(values);
         }
         
-		//this.getSprintsStore().sync();
+		this.getSprintsStore().sync();
 		
 		window.close();
 	},
@@ -78,8 +79,10 @@ Ext.define('ScrumTool.controller.Sprint', {
 		
 		stories = record.data.stories;
 		
-		for (var i = 0; i < stories.length; i++) {
-			this.getSprintBacklogGrid().getStore().add(stories[i]);
+		if (stories != null) {
+			for (var i = 0; i < stories.length; i++) {
+				this.getSprintBacklogGrid().getStore().add(stories[i]);
+			}			
 		}
 	},
 	
@@ -98,6 +101,10 @@ Ext.define('ScrumTool.controller.Sprint', {
 				this.getTasksStore().add({storyName: stories[i].name, description: null});
 			}
 		}
+	},
+	
+	onRemoveSprint: function(grid, rowIndex, colIndex) {
+		this.getSprintsStore().removeAt(rowIndex);
 	}
 	
 	
