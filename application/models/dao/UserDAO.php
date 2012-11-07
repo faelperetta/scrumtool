@@ -1,6 +1,7 @@
 <?php
 namespace models\dao;
 
+use models\entities\User;
 use models\dao\GenericDAO;
 
 class UserDAO extends GenericDAO {
@@ -11,12 +12,12 @@ class UserDAO extends GenericDAO {
 		return parent::findByPrimaryKey(self::$ENTITY, $id);
 	}
 	
-	public function save($usuario) {
-		parent::save($usuario);
+	public function save(User $user) {
+		parent::save($user);
 	}
 	
-	public function delete($usuario) {
-		parent::delete($usuario);
+	public function delete(User $user) {
+		parent::delete($user);
 	}
 	
 	public function findAll() {
