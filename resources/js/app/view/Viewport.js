@@ -12,7 +12,9 @@ Ext.define('ScrumTool.view.Viewport', {
 	    'ScrumTool.view.SprintBacklogList',
 	    'ScrumTool.view.EditTask',
 	    'ScrumTool.view.ProjectGrid',
-	    'ScrumTool.view.EditProject'
+	    'ScrumTool.view.EditProject',
+	    'ScrumTool.view.UserGrid',
+	    'ScrumTool.view.EditUser'
 	],
 	
 	layout: 'fit',
