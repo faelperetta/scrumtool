@@ -36,6 +36,12 @@ class modelsentitiesUserProxy extends \models\entities\User implements \Doctrine
     }
     
     
+    public function setId($id)
+    {
+        $this->__load();
+        return parent::setId($id);
+    }
+
     public function getId()
     {
         $this->__load();
