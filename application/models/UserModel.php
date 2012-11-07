@@ -1,4 +1,6 @@
 <?php
+use models\entities\User;
+
 use models\dao\UserDAO;
 
 class UserModel extends CI_Model {
@@ -12,6 +14,24 @@ class UserModel extends CI_Model {
 	
 	public function findAll() {
 		return $this->userDAO->findAll();
+	}
+
+	
+	public function save($data) {
+		$user = new User();
+		
+		if (!empty($data['id'])) {
+			$user->setId($data['id']);
+		}
+		
+		$user->setName($data['name']);
+		$user->setEmail($data['email']);
+		$user->setPassword($data['password']);
+		
+		$this->userDAO->save($user);
+		
+		return $user;
+		
 	}
 	
 	public function login($username, $password) {
