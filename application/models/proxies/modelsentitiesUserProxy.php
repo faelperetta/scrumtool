@@ -84,6 +84,18 @@ class modelsentitiesUserProxy extends \models\entities\User implements \Doctrine
         return parent::getPassword();
     }
 
+    public function setProjects($projects)
+    {
+        $this->__load();
+        return parent::setProjects($projects);
+    }
+
+    public function getProjects()
+    {
+        $this->__load();
+        return parent::getProjects();
+    }
+
     public function toArray()
     {
         $this->__load();
@@ -93,7 +105,7 @@ class modelsentitiesUserProxy extends \models\entities\User implements \Doctrine
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'email', 'password');
+        return array('__isInitialized__', 'id', 'name', 'email', 'password', 'projects');
     }
 
     public function __clone()
