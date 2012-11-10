@@ -42,6 +42,16 @@ class User
      */
     private $password;
 
+    
+    /**
+     * @ManyToMany(targetEntity="Project")
+     * @JoinTable(name="project_user",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="project_id", referencedColumnName="id")}
+     *      )
+     */
+    private $projects;
+    
 
     public function setId($id) {
     	$this->id = $id;
@@ -117,11 +127,26 @@ class User
         return $this->password;
     }
     
+    
+    public function setProjects($projects) {
+    	$this->projects = $projects;
+    }
+    
+    public function getProjects() {
+    	return $this->projects;
+    }
+    
     public function toArray() {
-    	return array(
+    	$userArray = array(
     				'id' => $this->id,
     				'name' => $this->name,
     				'email' => $this->email
     			);
+    	
+    	foreach ($this->projects as $project) {
+    		$userArray['projects'][] = $project->toArray();
+    	}
+    	
+    	return $userArray;
     }
 }
