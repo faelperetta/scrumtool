@@ -8,7 +8,7 @@ Ext.define('ScrumTool.view.SprintDetail', {
 		Ext.apply(this, {
 			tpl: Ext.create('Ext.XTemplate',
 					'<div id="sprintInfoContainer">',
-			        '<div id="sprintHeader"><h1>{name} </h1><div class="sprintDateRange">De 10/08/2012 até 05/09/2012</div><br clear="both" /></div>',
+			        '<div id="sprintHeader"><h1>{name} </h1><div class="sprintDateRange">De {startDate} até {endDate}</div><br clear="both" /></div>',
 			        '<table class="sprintDetail">',
 			            '<tr>',
 			                '<td>Estórias</td>',
@@ -39,7 +39,7 @@ Ext.define('ScrumTool.view.SprintDetail', {
 					},
 					
 					totalPoints: function(stories) {
-						if (typeof stories == 'object') {
+						if ((stories != null) && (typeof stories == 'object')) {
 							var totalPoints = 0;
 							for (var i = 0; i < stories.length; i++) {
 								totalPoints += stories[i].point;
