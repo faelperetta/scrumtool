@@ -22,9 +22,8 @@ class Sprints extends CI_Controller {
 	
 	public function save() {
 		$data = (array) json_decode($_POST['data']);
-		//$sprint = $this->sprintModel->save($data);
-		$sprint = null;
-		$this->utils->returnsSuccess($sprint);
+		$sprint = $this->sprintModel->save($data);
+		echo $this->utils->returnsSuccess($sprint);
 	}
 	
 }
