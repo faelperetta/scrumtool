@@ -9,6 +9,8 @@ Ext.define('ScrumTool.controller.Sprint', {
 		ref: 'sprintDetail', selector: 'sprintdetail'
 	}, {
 		ref: 'sprintBacklogGrid', selector: 'grid[id=sprintBacklogGrid]'
+	}, {
+		ref: 'backlogGrid', selector: 'grid[id=backlogGrid]' 
 	}],
 	
 	init: function() {
@@ -25,6 +27,10 @@ Ext.define('ScrumTool.controller.Sprint', {
 				click: this.onNewSprint
 			},
 			
+			'editsprint': {
+				render: this.onRenderEditSprint
+			},
+			
 			'editsprint > toolbar > button[action=save]': {
 				click: this.onSaveSprint
 			}
@@ -36,6 +42,11 @@ Ext.define('ScrumTool.controller.Sprint', {
 	
 	onAfterRenderSprintGrid: function() {
 		this.getSprintsStore().load();
+	},
+	
+	onRenderEditSprint: function() {
+		this.getBacklogGrid().getStore().loadAvailableStories();
+		
 	},
 	
 	onNewSprint: function() {
@@ -55,6 +66,7 @@ Ext.define('ScrumTool.controller.Sprint', {
         	record.set(values);
         	this.getSprintsStore().add(record);        	
         }  else {        	
+        	values.stories = this.getExtractStories(this.getSprintBacklogGrid().getStore().getRange());
         	record.set(values);
         }
         
