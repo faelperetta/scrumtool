@@ -26,4 +26,9 @@ class Stories extends CI_Controller {
 		echo $this->utils->returnsSuccess($story);
 	}
 	
+	public function availables() {
+		$stories = $this->storyModel->findAvailable();
+		echo $this->utils->returnsSuccess($stories);
+	}
+	
 }
