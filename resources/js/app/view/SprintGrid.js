@@ -23,7 +23,13 @@ Ext.define('ScrumTool.view.SprintGrid', {
 			text: 'Titulo',
 			dataIndex: 'name',
 			flex: 1
-		}, {
+		},{
+			text: 'Inicio',
+			dataIndex: 'startDate'
+		},{
+			text: 'Encerramento',
+			dataIndex: 'endDate'
+		},{
 			xtype: 'actioncolumn',
 			width: 45,
 			items: [{
