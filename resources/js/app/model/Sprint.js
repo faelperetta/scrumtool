@@ -4,6 +4,8 @@ Ext.define('ScrumTool.model.Sprint', {
 	fields: [
 	         {name: 'id'},
 	         {name: 'name'},
+	         {name: 'startDate'},
+	         {name: 'endDate'},
 	         {name: 'stories', defaultValue: null}
 	]
 });
