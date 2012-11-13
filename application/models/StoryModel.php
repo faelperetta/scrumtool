@@ -43,6 +43,18 @@ class StoryModel extends CI_Model {
 	}
 	
 	public function save($data) {
+		$story = $this->arrayToStory($data);
+		$this->storyDAO->save($story);
+		
+		return $story;
+		
+	}
+	
+	public function findAvailable() {
+		return $this->storyDAO->findByAvailable();
+	}
+	
+	public function arrayToStory($data) {
 		$story = new Story();
 		
 		if (!empty($data['id'])) {
@@ -56,30 +68,8 @@ class StoryModel extends CI_Model {
 		$story->setUser($this->userDAO->findByPrimaryKey(1));
 		$story->setProject($this->projectDAO->findByPrimaryKey(1));
 		$story->setCategory($this->categoryDAO->findByPrimaryKey($data['category']));
-		
-		$this->storyDAO->save($story);
-		
+
 		return $story;
-		
-	}
-	
-	public function saveTest() {
-		$cat = $this->storyDAO->findByPrimaryKey("models\entities\Category", 1);
-		$user = $this->storyDAO->findByPrimaryKey("models\entities\User", 1);
-		$project = $this->storyDAO->findByPrimaryKey("models\entities\Project", 1);
-		
-		$story = new Story();
-		
-		
-		$story->setUser($user);
-		$story->setCategory($cat);
-		$story->setDescription("");
-		$story->setName("Nova teste");
-		$story->setPoint(8);
-		$story->setProject($project);
-		$story->setStatus("");
-		
-		$this->storyDAO->save($story);
 	}
 
 }
