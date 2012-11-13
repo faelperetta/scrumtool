@@ -72,6 +72,30 @@ class modelsentitiesSprintProxy extends \models\entities\Sprint implements \Doct
         return parent::getStories();
     }
 
+    public function setStartDate($startDate)
+    {
+        $this->__load();
+        return parent::setStartDate($startDate);
+    }
+
+    public function getStartDate()
+    {
+        $this->__load();
+        return parent::getStartDate();
+    }
+
+    public function setEndDate($endDate)
+    {
+        $this->__load();
+        return parent::setEndDate($endDate);
+    }
+
+    public function addStory(\models\entities\Story $story)
+    {
+        $this->__load();
+        return parent::addStory($story);
+    }
+
     public function toArray()
     {
         $this->__load();
@@ -81,7 +105,7 @@ class modelsentitiesSprintProxy extends \models\entities\Sprint implements \Doct
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'stories');
+        return array('__isInitialized__', 'id', 'name', 'stories', 'startDate', 'endDate');
     }
 
     public function __clone()
