@@ -25,4 +25,9 @@ class StoryDAO extends GenericDAO {
 		parent::delete($story);
 	}
 	
+	public function findByAvailable() {
+		$query = $this->entityManager->createQuery("SELECT s FROM ". self::$ENTITY . " s WHERE s.sprint IS NULL");
+	 	return $query->getResult();
+	} 
+	
 }
