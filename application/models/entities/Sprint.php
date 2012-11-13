@@ -2,6 +2,8 @@
 
 namespace models\entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,9 +33,29 @@ class Sprint
     
     /**
      * 
-     * @OneToMany(targetEntity="Story", mappedBy="sprint")
+     * @OneToMany(targetEntity="Story", mappedBy="sprint", cascade={"all"})
      */
     private $stories;
+    
+    
+     /**
+     * @var datetime $startDate
+     *
+     * @Column(name="start_date", type="datetime", nullable=true)
+     */
+    private $startDate;
+    
+    /**
+     * @var datetime $endDate
+     *
+     * @Column(name="end_date", type="datetime", nullable=true)
+     */
+    private $endDate;
+    
+    
+    public function __construct() {
+    	$this->stories = new ArrayCollection();
+    }
     
 
     public function setId($id) {
@@ -78,10 +100,34 @@ class Sprint
     	return $this->stories;
     }
     
+    public function setStartDate($startDate) {
+    	$this->startDate = $startDate;
+    }
+    
+    public function getStartDate() {
+    	return $this->startDate;
+    }
+    
+    public function setEndDate($endDate) {
+    	$this->endDate = $endDate;
+    }
+    
+    public function addStory(Story $story) {
+    	$this->stories->add($story);
+    }
+    
     public function toArray() {
-    	return array(
+    	$sprint =  array(
     				'id' => $this->id,
-    				'name' => $this->name
+    				'name' => $this->name,
+    				'startDate' => $this->startDate->format('d/m/Y'),
+    				'endDate' => $this->endDate->format('d/m/Y')
     			);
+    	
+    	foreach ($this->stories as $story) {
+    		$sprint['stories'][] = $story->toArray();
+    	}
+    	
+    	return $sprint;
     }
 }
