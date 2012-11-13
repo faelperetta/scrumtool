@@ -69,7 +69,7 @@ class Story
     /**
      * @var Sprint
      *
-     * @ManyToOne(targetEntity="Sprint")
+     * @ManyToOne(targetEntity="Sprint", inversedBy="stories")
      * @JoinColumns({
      *   @JoinColumn(name="sprint_id", referencedColumnName="id")
      * })
@@ -236,7 +236,7 @@ class Story
      *
      * @param Sprint $sprint
      */
-    public function setSprint(\Sprint $sprint)
+    public function setSprint(Sprint $sprint)
     {
         $this->sprint = $sprint;
     }
