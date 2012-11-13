@@ -39,10 +39,14 @@ Ext.define('ScrumTool.view.EditSprint', {
 			}, {
 				xtype:'datefield',
 				fieldLabel: 'Data Inicio',
+				name: 'startDate',
+				format: 'd/m/Y',
 				flex: 1
 			}, {
 				xtype: 'datefield',
 				fieldLabel: 'Data Fim',
+				name: 'endDate',
+				format: 'd/m/Y',
 				flex: 1
 			}]
 		
@@ -62,9 +66,9 @@ Ext.define('ScrumTool.view.EditSprint', {
 				xtype: 'grid',
 				title: 'Product Backlog',
 				flex:1,
-				//store: Ext.create('ScrumTool.store.Stories'),
-				store: 'Stories',
-				id: 'gridBacklogItemsToSel',
+				store: Ext.create('ScrumTool.store.Stories', true),
+				//store: 'Stories',
+				id: 'backlogGrid',
 				
 				viewConfig: {
 					plugins: {
