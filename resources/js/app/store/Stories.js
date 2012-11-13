@@ -3,6 +3,12 @@ Ext.define('ScrumTool.store.Stories', {
 	requires: 'ScrumTool.model.Story',
 	model: 'ScrumTool.model.Story',
 	
+	loadAvailableStories: function() {
+		this.proxy.api = {};
+		this.proxy.url = 'stories/availables',
+		this.load();
+	},
+	
 	proxy: {
 		type: 'ajax',
 		method: 'post',
