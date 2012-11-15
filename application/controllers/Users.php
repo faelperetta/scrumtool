@@ -20,6 +20,11 @@ class Users extends CI_Controller {
 		echo $this->utils->returnsSuccess($userList);
 	}
 	
+	public function projectUsers() {
+		$userList = $this->userModel->findByProject($this->session->userdata('currentProjectId'));
+		echo $this->utils->returnsSuccess($userList);
+	}
+	
 	public function save() {
 		$data = (array) json_decode($_POST['data']);
 		$user = $this->userModel->save($data);
@@ -34,6 +39,7 @@ class Users extends CI_Controller {
 		
 		if ($user != null) {
 			$this->session->set_userdata('user', $user->toArray());
+			$this->session->set_userdata('currentProjectId', $user->getProjects()->get(0)->getId());
 			$result['success'] = TRUE;
 			$result['user'] = $user->toArray();
 			echo json_encode($result);
@@ -50,6 +56,10 @@ class Users extends CI_Controller {
 		} else {
 			echo "";
 		}
+	}
+	
+	public function logout() {
+		$this->session->unset_userdata('user');
 	}
 	
 }
