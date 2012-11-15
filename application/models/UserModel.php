@@ -16,8 +16,17 @@ class UserModel extends CI_Model {
 		return $this->userDAO->findAll();
 	}
 
+	public function findByProject($projectId) {
+		return $this->userDAO->findByProject($projectId);
+	}
 	
 	public function save($data) {
+		$user = $this->arrayToUser($data);
+		$this->userDAO->save($user);
+		return $user;
+	}
+	
+	public function arrayToUser($data) {
 		$user = new User();
 		
 		if (!empty($data['id'])) {
@@ -28,10 +37,7 @@ class UserModel extends CI_Model {
 		$user->setEmail($data['email']);
 		$user->setPassword($data['password']);
 		
-		$this->userDAO->save($user);
-		
 		return $user;
-		
 	}
 	
 	public function login($username, $password) {
