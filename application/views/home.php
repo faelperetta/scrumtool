@@ -7,7 +7,6 @@
 		<link rel="stylesheet" type="text/css" href="resources/ext-4/resources/css/ext-all-gray.css" />
 		<link rel="stylesheet" type="text/css" href="resources/css/scrumtool.css" />
 		<script type="text/javascript" src="resources/js/ext-all.js"></script>
-		<!-- <script type="text/javascript" src="resources/js/ext-neptune.js"></script> -->
 		
 		<script type="text/javascript" src="resources/js/app.js"></script>
 	</head>
