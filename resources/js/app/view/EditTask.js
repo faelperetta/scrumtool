@@ -26,21 +26,55 @@ Ext.define('ScrumTool.view.EditTask', {
 			items: [{
 				xtype: 'combobox',
 				fieldLabel: 'História',
-				name: 'storyName',
-				valueField: 'name',
+				name: 'story',
+				valueField: 'id',
 				displayField: 'name',
-				story: Ext.create('ScrumTool.store.Stories'),
+				store: Ext.create('ScrumTool.store.Stories'),
 				queryMode: 'local',
 				id: 'cboTaskStory'
 			},{
 				xtype: 'textfield',
 				fieldLabel: 'Descrição',
 				name: 'description'
-			}, {
-				xtype: 'textfield',
-				fieldLabel: 'Horas',
-				name: 'hours'
-			}]
+			},{
+                xtype: 'fieldcontainer',
+                layout: 'hbox',
+                defaultType: 'textfield',
+
+                fieldDefaults: {
+                    labelAlign: 'top'
+                },
+
+                items: [{
+    				xtype: 'numberfield',
+    				fieldLabel: 'Horas',
+    				name: 'hours',
+    				width:50
+    			},{
+    				xtype: 'combobox',
+    				fieldLabel: 'Responsável',
+    				name: 'user',
+    				valueField: 'id',
+    				displayField: 'name',
+    				store: 'ProjectUsers',
+    				queryMode: 'local',
+    				id: 'cboAssignedTo',
+    				margins: '0 0 0 5'
+    			},{
+    				xtype: 'combobox',
+    				fieldLabel: 'Status',
+    				name: 'status',
+    				valueField: 'name',
+    				displayField: 'name',
+    				store:  Ext.create('Ext.data.ArrayStore', {
+    				    fields: ['name'],
+    				    data:[['PARA FAZER'], ['FAZENDO'], ['EM TESTE'], ['PRONTO']]
+    				}),
+    				flex:1,
+    				queryMode: 'local',
+    				margins: '0 0 0 5'
+    			}]
+           }]
 		}];
 		
 		me.buttons = [{
