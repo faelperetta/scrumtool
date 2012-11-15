@@ -25,5 +25,10 @@ class TaskDAO extends GenericDAO {
 	public function delete(Task $task) {
 		parent::delete($task);
 	}
-	
+
+	public function findBySprint($sprintId) {
+		$query = $this->entityManager
+			->createQuery("SELECT t, s, sp FROM ". self::$ENTITY . " t JOIN t.story s JOIN s.sprint sp WHERE sp.id = " . $sprintId);
+	 	return $query->getResult();
+	}
 }
