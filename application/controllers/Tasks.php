@@ -12,8 +12,15 @@ class Tasks extends CI_Controller {
 		$this->load->model("TaskModel", "taskModel");
 	}
 	
-	public function index() {
-		$taskList = $this->taskModel->findAll();
-		echo count($taskList);
+	
+	public function all() {
+		$taskList = $this->taskModel->findBySprint($_GET['storyId']);
+		echo $this->utils->returnsSuccess($taskList);
+	}
+	
+	public function save() {
+		$data = (array) json_decode($_POST['data']);
+		$task = $this->taskModel->save($data);
+		echo $this->utils->returnsSuccess($task);
 	}
 }
