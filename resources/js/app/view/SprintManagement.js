@@ -21,10 +21,14 @@ Ext.define('ScrumTool.view.SprintManagement', {
 			xtype: 'container',
 			region: 'center',	
 			flex: 1,
+			layout: 'border',
+			style: 'background: #FFF !important',
 			items: [{
-				xtype: 'sprintdetail'
+				xtype: 'sprintdetail',
+				region: 'north'
 			}, {
-				xtype: 'sprintbackloglist'
+				xtype: 'sprintbackloglist',
+				region: 'center'
 			}]
 		}];
 		
