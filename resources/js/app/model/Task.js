@@ -7,6 +7,16 @@ Ext.define('ScrumTool.model.Task', {
 	         {name: 'hours'},
 	         {name: 'story'},
 	         {name: 'user'},
-	         {name: 'storyName'}
+	         {name: 'status'},
+	         {name: 'user'},
+	         {
+	        	 name: 'storyName', 
+	        	 persist: false, 
+	        	 convert: function(v, record) {
+	        		if (record.data.story) {
+	        			return record.data.story.name;
+	        		}
+	        	 }
+	         }
 	]
 });
