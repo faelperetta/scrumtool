@@ -27,6 +27,13 @@ class Task
      * @Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
+    
+    /**
+     * @var string $status
+     *
+     * @Column(name="status", type="string", length=30, nullable=false)
+     */
+    private $status;
 
     /**
      * @var integer $hours
@@ -55,6 +62,10 @@ class Task
      */
     private $user;
 
+    
+    public function setId($id) {
+    	$this->id = $id;
+    }
 
     /**
      * Get id
@@ -85,6 +96,27 @@ class Task
     {
         return $this->description;
     }
+    
+    /**
+     * Set status
+     *
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+    	$this->status = $status;
+    }
+    
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+    	return $this->status;
+    }
+    
 
     /**
      * Set hours
@@ -111,7 +143,7 @@ class Task
      *
      * @param Story $story
      */
-    public function setStory(\Story $story)
+    public function setStory(Story $story)
     {
         $this->story = $story;
     }
@@ -131,7 +163,7 @@ class Task
      *
      * @param User $user
      */
-    public function setUser(\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -144,5 +176,21 @@ class Task
     public function getUser()
     {
         return $this->user;
+    }
+    
+    public function toArray() {
+    	$task = array(
+    			'id' => $this->id,
+    			'description' => $this->description,
+    			'hours' => $this->hours,
+    			'story' => $this->story->toArray(),
+    			'status' => $this->status
+    	);
+    	
+    	if ($this->user != null) {
+    		$task['user'] = $this->user->toArray();
+    	}
+    	
+    	return $task;
     }
 }
