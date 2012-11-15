@@ -143,8 +143,10 @@ class User
     				'email' => $this->email
     			);
     	
-    	foreach ($this->projects as $project) {
-    		$userArray['projects'][] = $project->toArray();
+    	if ($this->projects != null) {    		
+	    	foreach ($this->projects as $project) {
+	    		$userArray['projects'][] = $project->toArray();
+	    	}
     	}
     	
     	return $userArray;
