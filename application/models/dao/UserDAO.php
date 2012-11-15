@@ -31,4 +31,11 @@ class UserDAO extends GenericDAO {
 		return $users;
 	}
 	
+	public function findByProject($projectId) {
+		$dql = "SELECT u FROM " . self::$ENTITY . " u JOIN u.projects p WHERE p = $projectId";
+		$query = $this->entityManager->createQuery($dql);
+		$users = $query->getResult();
+		return $users;
+	}
+	
 }
