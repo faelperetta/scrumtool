@@ -26,22 +26,37 @@ Ext.define('ScrumTool.view.SprintBacklogList', {
 		
 		me.store = 'Tasks',
 		
-		
-		me.viewConfig = {
-			getRowClass: function(rec) {
-            	return rec.data.description == null ? 'x-hide-display' : '';
-            }
-		},
-		
 		me.columns = [{
 			text: 'Tarefa',
 			dataIndex: 'description',
-			flex:1
-		}, {
+			flex:1,
+			summaryType: 'count',
+	        summaryRenderer: function(value){
+	            return Ext.String.format('{0} tarefa{1}', value, value !== 1 ? 's' : '');
+	        }
+		},{
+			text: 'Responsável',
+			dataIndex: 'user',
+			renderer: function(value) {
+				if (value) {
+					return value.name;
+				}
+			},
+			width: 150
+		},{
+			text: 'Status',
+			dataIndex: 'status',
+			align: 'center',
+			width: 80
+		},{
 			text: 'Horas',
 			dataIndex: 'hours',
-			width: 40,
-			align: 'center'
+			width: 60,
+			align: 'center',
+			summaryType: 'sum',
+	        summaryRenderer: function(value){
+	            return value;
+	        }
 		}];
 		
 		me.callParent(arguments);
