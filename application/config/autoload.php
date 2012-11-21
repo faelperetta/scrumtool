@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('doctrine', 'utils', 'session', 'dateutil');
+$autoload['libraries'] = array('doctrine', 'utils', 'session', 'dateutil', 'generateburndown');
 
 
 /*
