@@ -94,5 +94,4 @@ Ext.define('ScrumTool.controller.Task', {
 			}
 		}		
 	}
-	
 });

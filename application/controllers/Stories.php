@@ -16,7 +16,8 @@ class Stories extends CI_Controller {
 	
 	public function all() {		
 		//header('Content-type: application/json');
-		$stories = $this->storyModel->findAll();
+		$currentProject = $this->session->userdata('currentProject');
+		$stories = $this->storyModel->findByProject($currentProject['id']);
 		echo $this->utils->returnsSuccess($stories);
 	}
 	
@@ -27,7 +28,8 @@ class Stories extends CI_Controller {
 	}
 	
 	public function availables() {
-		$stories = $this->storyModel->findAvailable();
+		$currentProject = $this->session->userdata('currentProject');
+		$stories = $this->storyModel->findAvailable($currentProject['id']);
 		echo $this->utils->returnsSuccess($stories);
 	}
 	

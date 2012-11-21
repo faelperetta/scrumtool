@@ -52,6 +52,16 @@ class Sprint
      */
     private $endDate;
     
+    /**
+     * @var Project
+     *
+     * @ManyToOne(targetEntity="Project")
+     * @JoinColumns({
+     *   @JoinColumn(name="project_id", referencedColumnName="id")
+     * })
+     */
+    private $project;
+    
     
     public function __construct() {
     	$this->stories = new ArrayCollection();
@@ -112,8 +122,32 @@ class Sprint
     	$this->endDate = $endDate;
     }
     
+    public function getEndDate() {
+    	return $this->endDate;
+    }
+    
     public function addStory(Story $story) {
     	$this->stories->add($story);
+    }
+    
+    /**
+     * Set project
+     *
+     * @param Project $project
+     */
+    public function setProject($project)
+    {
+    	$this->project = $project;
+    }
+    
+    /**
+     * Get project
+     *
+     * @return Project
+     */
+    public function getProject()
+    {
+    	return $this->project;
     }
     
     public function toArray() {

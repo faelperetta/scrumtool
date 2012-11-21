@@ -14,7 +14,7 @@ class Tasks extends CI_Controller {
 	
 	
 	public function all() {
-		$taskList = $this->taskModel->findBySprint($_GET['storyId']);
+		$taskList = $this->taskModel->findBySprint($_GET['sprintId']);
 		echo $this->utils->returnsSuccess($taskList);
 	}
 	

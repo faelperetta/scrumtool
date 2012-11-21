@@ -25,4 +25,9 @@ class Dateutil {
 		return $dateTime;
 	}
 	
+	public function diffDate(DateTime $initDate, DateTime $endData) {
+		$diff = $initDate->diff($endData);
+		return $diff->d;
+	}
+	
 }

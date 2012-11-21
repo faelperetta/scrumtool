@@ -7,7 +7,7 @@ Ext.define('ScrumTool.view.EditStory', {
 		
 		me.modal = true;
 		
-		me.title = 'New History';
+		me.title = 'Nova Estória';
 		
 		me.width = 700;
 		me.height = 600;
@@ -128,10 +128,10 @@ Ext.define('ScrumTool.view.EditStory', {
 		};
 		
 		me.buttons = [{
-			text: 'Save',
+			text: 'Salvar',
 			action: 'save'
 		}, {
-			text: 'Cancel',
+			text: 'Cancelar',
 			scope: this,
 			handler: function() {
 				this.close();

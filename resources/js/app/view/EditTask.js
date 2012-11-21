@@ -78,10 +78,10 @@ Ext.define('ScrumTool.view.EditTask', {
 		}];
 		
 		me.buttons = [{
-			text: 'Save',
+			text: 'Salvar',
 			action: 'save'
 		}, {
-			text: 'Cancel',
+			text: 'Cancelar',
 			scope: this,
 			handler: function() {
 				this.close();

@@ -1,7 +1,7 @@
 Ext.define('ScrumTool.controller.Sprint', {
 	extend: 'Ext.app.Controller',
 	
-	stores: ['Sprints', 'Tasks'],
+	stores: ['Sprints', 'Tasks', 'ChartData'],
 	
 	views: ['EditSprint'],
 	
@@ -23,6 +23,10 @@ Ext.define('ScrumTool.controller.Sprint', {
 				editsprint: this.onEditSprint,
 				select: this.onSelectGritItem,
 				removesprint: this.onRemoveSprint
+			},
+			
+			'sprintbackloglist > toolbar > button[action=showBurndown]': {
+				click: this.onShowBurndown
 			},
 			
 			'sprintgrid > toolbar > button[action=newSprint]': {
@@ -107,7 +111,10 @@ Ext.define('ScrumTool.controller.Sprint', {
 	
 	onSelectGritItem: function(rowModel, record, index) {
 		this.getSprintDetail().setActive(record);
-		this.getTasksStore().proxy.extraParams = {storyId: record.data.id};
+		
+		this.getChartDataStore().proxy.extraParams = {sprintId: record.data.id};
+		
+		this.getTasksStore().proxy.extraParams = {sprintId: record.data.id};
 		this.getTasksStore().load();
 	},
 	
@@ -125,6 +132,97 @@ Ext.define('ScrumTool.controller.Sprint', {
 	
 	onRemoveSprint: function(grid, rowIndex, colIndex) {
 		this.getSprintsStore().removeAt(rowIndex);
+	},
+	
+	onShowBurndown: function() {
+		var me = this;
+		me.getChartDataStore().load(function() {
+			me.generateChart();
+		});
+	},
+	
+	generateChart: function() {
+		var chart = Ext.create('Ext.chart.Chart', {
+            style: 'background:#fff',
+            animate: true,
+            store: 'ChartData',
+            shadow: true,
+            theme: 'Category1',
+            legend: {
+                position: 'right'
+            },
+            axes: [{
+                type: 'Numeric',
+                minimum: 0,
+                position: 'left',
+                fields: ['planned', 'done', 'data3'],
+                title: 'Horas',
+                minorTickSteps: 1,
+                grid: {
+                    odd: {
+                        opacity: 1,
+                        fill: '#ddd',
+                        stroke: '#bbb',
+                        'stroke-width': 0.5
+                    }
+                }
+            }, {
+                type: 'Category',
+                position: 'bottom',
+                fields: ['name'],
+                title: 'Dias da Sprint'
+            }],
+            series: [{
+                type: 'line',
+                title: 'Planejado',
+                highlight: {
+                    size: 7,
+                    radius: 7
+                },
+                axis: 'left',
+                xField: 'name',
+                yField: 'planned',
+                markerConfig: {
+                    type: 'cross',
+                    size: 4,
+                    radius: 4,
+                    'stroke-width': 0
+                }
+            }, {
+                type: 'line',
+                title: 'Realizado',
+                highlight: {
+                    size: 7,
+                    radius: 7
+                },
+                axis: 'left',
+                smooth: true,
+                xField: 'name',
+                yField: 'done',
+                markerConfig: {
+                    type: 'circle',
+                    size: 4,
+                    radius: 4,
+                    'stroke-width': 0
+                },
+                tips: {
+                	  width: 140,
+                	  height: 28,
+                	  renderer: function(storeItem, item) {
+                	    this.setTitle(Math.floor(storeItem.get('done')));
+                	  }
+                	},
+            }]
+        });
+	 
+	 Ext.create('Ext.window.Window', {
+		    title: 'Burndown',
+		    maximizable:true,
+		    height: 400,
+		    width: 600,
+		    layout: 'fit',
+		    items: chart
+		}).show();
 	}
 	
 	

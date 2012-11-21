@@ -36,7 +36,7 @@ Ext.define('ScrumTool.controller.Story', {
 	 * Metodo que abre a window com o formulario para cadastro de uma historia.
 	 */
 	onNewStory: function() {
-		var storyWindow = Ext.widget('editstory', {title: 'Nova História'});
+		var storyWindow = Ext.widget('editstory', {title: 'Nova Estória'});
 		storyWindow.show();
 	},
 	

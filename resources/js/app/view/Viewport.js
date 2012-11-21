@@ -38,13 +38,22 @@ Ext.define('ScrumTool.view.Viewport', {
 				}, {
 					html: 'empty',
 					flex: 1
-				}, {
+				},{
+					xtype: 'combobox',
+					fieldLabel: 'Projeto',
+					name: 'changeProject',
+					id: 'changeProject',
+					valueField: 'id',
+					displayField: 'name',
+					store: Ext.create('ScrumTool.store.Projects', {data: []}),
+					queryMode: 'local'
+				}/*, {
 					id: 'search',
                     name: 'search',
                     emptyText: 'enter search term',
                     xtype: 'trigger',
                     triggerCls: 'x-form-search-trigger'
-				}]
+				}*/]
 				
 				
 			}],

@@ -3,6 +3,7 @@
 
 /**
  * @property UserModel $userModel
+ * @property ProjectModel $projectModel
  * @property Utils $utils
  * @author Rafael
  *
@@ -13,6 +14,7 @@ class Users extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('UserModel', 'userModel');
+		$this->load->model('ProjectModel', 'projectModel');
 	}
 	
 	public function all() {
@@ -39,9 +41,13 @@ class Users extends CI_Controller {
 		
 		if ($user != null) {
 			$this->session->set_userdata('user', $user->toArray());
-			$this->session->set_userdata('currentProjectId', $user->getProjects()->get(0)->getId());
+			
+			$this->session->set_userdata('currentProject', $user->getProjects()->get(0)->toArray());
+			
+			
 			$result['success'] = TRUE;
 			$result['user'] = $user->toArray();
+			$result['user']['currentProject'] = $this->session->userdata('currentProject');
 			echo json_encode($result);
 		} else {
 			echo json_encode(array('success' => false));
@@ -52,6 +58,7 @@ class Users extends CI_Controller {
 	public function isLogged() {
 		$user = $this->session->userdata('user');
 		if ($user) {
+			$user['currentProject'] = $this->session->userdata('currentProject');
 			echo json_encode($user);
 		} else {
 			echo "";
@@ -60,6 +67,16 @@ class Users extends CI_Controller {
 	
 	public function logout() {
 		$this->session->unset_userdata('user');
+		$this->session->unset_userdata('currentProject');
 	}
+	
+	public function changeProject() {
+		$project = $this->projectModel->findByPrimaryKey($_POST['projectId']);
+		if (!empty($project)) {
+			$this->session->set_userdata('currentProject', $project->toArray());
+			echo "ok";		
+		}
+	}
+	
 	
 }

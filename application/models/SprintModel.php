@@ -1,5 +1,7 @@
 <?php
  
+use models\entities\Project;
+
 use models\entities\Sprint;
 
 use models\dao\SprintDAO;
@@ -29,12 +31,22 @@ class SprintModel extends CI_Model {
 		return $this->sprintDAO->findAll();
 	}
 	
+	public function findByProject($projectId) {
+		return $this->sprintDAO->findByProject($projectId);
+	}
+	
 	public function save($data) {
 		$sprint = new Sprint();
 		if (!empty($data['id'])) {
 			$sprint->setId($data['id']);
 		}
 		$sprint->setName($data['name']);
+		
+		$currentProject = $this->session->userdata('currentProject');
+		$project = new Project();
+		$project->setId($currentProject['id']);
+		
+		$sprint->setProject($project);
 		
 		$sprint->setStartDate($this->dateutil->strToDate($data['startDate'], '00:00:00'));
 		$sprint->setEndDate($this->dateutil->strToDate($data['endDate'], '23:59:59'));
@@ -54,6 +66,21 @@ class SprintModel extends CI_Model {
 	
 	public function delete($sprint) {
 		$this->sprintDAO->delete($sprint);
+	}
+	
+	public function getTotalHours($sprintId) {
+		return $this->sprintDAO->getTotalHours($sprintId);
+	}
+	
+	public function getHoursDonePerDay($sprintId) {
+		$hoursPerDay =  $this->sprintDAO->getHoursDonePerDay($sprintId);
+		
+		$formatted = array();
+		foreach ($hoursPerDay as $item) {
+			$formatted[$item['day']] = $item['total'];
+		}
+		
+		return $formatted;
 	}
 	
 }

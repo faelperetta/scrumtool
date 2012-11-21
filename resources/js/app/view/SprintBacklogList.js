@@ -13,6 +13,10 @@ Ext.define('ScrumTool.view.SprintBacklogList', {
 	                text: 'Nova Tarefa',
 	                action: 'newTask',
 	                scope: this
+	            }, {
+	            	text: 'Visualizar Burndown',
+	            	action: 'showBurndown',
+	            	scope: this
 	            }]
 		};
 		

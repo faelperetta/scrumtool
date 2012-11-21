@@ -16,7 +16,8 @@ class Sprints extends CI_Controller {
 	}
 	
 	public function all() {
-		$sprintList = $this->sprintModel->findAll();
+		$currentProject = $this->session->userdata('currentProject');
+		$sprintList = $this->sprintModel->findByProject($currentProject['id']);
 		echo $this->utils->returnsSuccess($sprintList);
 	}
 	
@@ -24,6 +25,20 @@ class Sprints extends CI_Controller {
 		$data = (array) json_decode($_POST['data']);
 		$sprint = $this->sprintModel->save($data);
 		echo $this->utils->returnsSuccess($sprint);
+	}
+	
+	public function burndown() {
+		$sprintId = $_GET['sprintId'];
+		$sprint = $this->sprintModel->findByPrimaryKey($sprintId);
+		
+		$totalDeHoras = $this->sprintModel->getTotalHours($sprintId);
+		$hoursPerDay = $this->sprintModel->getHoursDonePerDay($sprintId);
+		
+		$this->generateburndown->setSprint($sprint);
+		$this->generateburndown->setTotalOfHours($totalDeHoras);
+		$this->generateburndown->setHoursDonePerDay($hoursPerDay);
+		
+		echo json_encode($this->generateburndown->generate());
 	}
 	
 }

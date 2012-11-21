@@ -54,6 +54,12 @@ class TaskModel extends CI_Model {
 		$task->setHours($data['hours']);
 		$task->setStatus($data['status']);
 		
+		if ($data['status'] == 'PRONTO') {
+			$completedAt = new DateTime();
+			$completedAt->setTime(0, 0, 0);
+			$task->setCompletedAt($completedAt);
+		}
+		
 		$story = (array) $data['story'];
 		$task->setStory($this->storyModel->arrayToStory($story));
 		

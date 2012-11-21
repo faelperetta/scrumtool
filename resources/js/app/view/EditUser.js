@@ -41,14 +41,36 @@ Ext.define('ScrumTool.view.EditUser', {
 				xtype: 'textfield',
 				fieldLabel: 'Confirmar Senha',
 				inputType: 'password'
+			}, {
+				xtype: 'combobox',
+				fieldLabel: 'Perfil',
+				name: 'role',
+				valueField: 'name',
+				displayField: 'name',
+				store:  Ext.create('Ext.data.ArrayStore', {
+				    fields: ['name'],
+				    data:[['Administrador'], ['Product Owner'], ['Scrum Master'], ['Time']]
+				}),
+				flex:1,
+				queryMode: 'local'
+			}, {
+				xtype: 'grid',
+				store: 'Projects',
+				title: 'Projetos',
+				selModel:  Ext.create('Ext.selection.CheckboxModel'),
+				columns: [{
+					text: 'Projeto',
+					dataIndex: 'name',
+					flex: 1
+				}]
 			}]
 		}];
 		
 		me.buttons = [{
-			text: 'Save',
+			text: 'Salvar',
 			action: 'save'
 		}, {
-			text: 'Cancel',
+			text: 'Cancelar',
 			scope: this,
 			handler: function() {
 				this.close();

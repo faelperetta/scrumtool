@@ -123,10 +123,10 @@ Ext.define('ScrumTool.view.EditSprint', {
 		}];
 		
 		me.buttons = [{
-			text: 'Save',
+			text: 'Salvar',
 			action: 'save'
 		}, {
-			text: 'Cancel',
+			text: 'Cancelar',
 			scope: this,
 			handler: function() {
 				this.close();

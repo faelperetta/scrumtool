@@ -61,6 +61,13 @@ class Task
      * })
      */
     private $user;
+    
+    /**
+     * @var datetime $completed_at
+     *
+     * @Column(name="completed_at", type="datetime", nullable=false)
+     */
+    private $completedAt;
 
     
     public function setId($id) {
@@ -176,6 +183,15 @@ class Task
     public function getUser()
     {
         return $this->user;
+    }
+    
+    
+    public function setCompletedAt($completedAt) {
+    	$this->completedAt = $completedAt;
+    }
+    
+    public function getCompletedAt($completedAt) {
+    	return $this->completedAt;
     }
     
     public function toArray() {

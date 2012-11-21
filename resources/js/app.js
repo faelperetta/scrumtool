@@ -9,11 +9,12 @@ Ext.application({
 
     
     models: ['Menu'],
-    stores: ['Menus'],
+    stores: ['Menus', 'ChartData'],
     controllers: ['Login', 'Story', 'Sprint', 'Menu', 'Task', 'Project', 'User', 'Dashboard'],
     
     launch: function() {
     	var me = this;
+    	
     	Ext.Ajax.request({
 			url: 'users/isLogged',
 			success: function(response) {
