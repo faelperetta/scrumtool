@@ -4,7 +4,7 @@ Ext.define('ScrumTool.model.Task', {
 	fields: [
 	         {name: 'id'},
 	         {name: 'description'},
-	         {name: 'hours'},
+	         {name: 'hours', type: 'int'},
 	         {name: 'story'},
 	         {name: 'user'},
 	         {name: 'status'},

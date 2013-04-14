@@ -3,6 +3,10 @@ Ext.define('ScrumTool.controller.User', {
 	
 	stores: ['Users'],
 	
+	refs: [{
+		ref: 'projectGrid', selector: 'grid[id=gridUserProjects]'
+	}],
+	
 	init: function() {
 		this.control({
 			'usergrid': {
@@ -30,18 +34,32 @@ Ext.define('ScrumTool.controller.User', {
 		this.getUsersStore().load();
 	},
 	
+	extractProjects: function() {
+		var records = this.getProjectGrid().getSelectionModel().getSelection(),
+			projects = [];
+		
+		for(var i = 0; i < records.length; i++) {
+			projects.push(records[i].data);
+		}
+		
+		return projects;
+		
+	},
+	
 	onSaveUser: function(button) {
 		var window = button.up('window'),
         form   = window.down('form'),
         record = form.getRecord(),
         values = form.getValues();
-
+		
         if (record == null) {
         	record = Ext.create('ScrumTool.model.User');
+        	record.set('projects', this.extractProjects());
         	record.set(values);
         	this.getUsersStore().add(record.data);        	
         }  else {        	
         	record.set(values);
+        	record.set('projects', this.extractProjects());
         }
         
         this.getUsersStore().sync();
@@ -58,5 +76,6 @@ Ext.define('ScrumTool.controller.User', {
 	
 	onRemoveUser: function(grid, rowIndex, colIndex) {
 		grid.getStore().removeAt(rowIndex);
+		grid.getStore().sync();
 	}
 });

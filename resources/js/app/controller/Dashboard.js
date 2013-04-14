@@ -1,8 +1,12 @@
 Ext.define('ScrumTool.controller.Dashboard', {
 	extend: 'Ext.app.Controller',
 	
+	stores: ['Menus'],
+	
 	refs: [{
 		ref: 'cboChangeProject', selector: 'combobox[id=changeProject]'
+	}, {
+		ref: 'menu', selector: 'menulist'
 	}],
 	
 	init: function() {
@@ -12,6 +16,12 @@ Ext.define('ScrumTool.controller.Dashboard', {
 					var projects = this.application.currentUser.projects;
 					this.getCboChangeProject().getStore().loadData(projects);
 					comp.setActive(this.application.currentUser.currentProject);
+					
+					if (this.application.currentUser.role != 'Administrador') {
+						this.getMenusStore().removeAt(3);
+						this.getMenusStore().removeAt(0);
+					}
+					
 				}
 			},
 			

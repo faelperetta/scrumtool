@@ -3,6 +3,7 @@ Ext.define('ScrumTool.view.SprintManagement', {
 	alias: 'widget.sprintmanagement',
 	title: 'Gerenciamento de Sprints',
 	bodyStyle: 'background: #FFF',
+	closable: true,
 	
 	initComponent: function() {
 		var me = this;

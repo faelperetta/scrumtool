@@ -15,6 +15,7 @@ class Users extends CI_Controller {
 		
 		$this->load->model('UserModel', 'userModel');
 		$this->load->model('ProjectModel', 'projectModel');
+		$this->load->helper('url');
 	}
 	
 	public function all() {
@@ -23,7 +24,8 @@ class Users extends CI_Controller {
 	}
 	
 	public function projectUsers() {
-		$userList = $this->userModel->findByProject($this->session->userdata('currentProjectId'));
+		$currentProject = $this->session->userdata('currentProject');
+		$userList = $this->userModel->findByProject($currentProject['id']);
 		echo $this->utils->returnsSuccess($userList);
 	}
 	
@@ -48,6 +50,7 @@ class Users extends CI_Controller {
 			$result['success'] = TRUE;
 			$result['user'] = $user->toArray();
 			$result['user']['currentProject'] = $this->session->userdata('currentProject');
+			$result['user']['currentProject']['statistics'] = $this->projectModel->getStatistics($result['user']['currentProject']['id']);
 			echo json_encode($result);
 		} else {
 			echo json_encode(array('success' => false));
@@ -59,6 +62,7 @@ class Users extends CI_Controller {
 		$user = $this->session->userdata('user');
 		if ($user) {
 			$user['currentProject'] = $this->session->userdata('currentProject');
+			$user['currentProject']['statistics'] = $this->projectModel->getStatistics($user['currentProject']['id']);
 			echo json_encode($user);
 		} else {
 			echo "";
@@ -68,6 +72,7 @@ class Users extends CI_Controller {
 	public function logout() {
 		$this->session->unset_userdata('user');
 		$this->session->unset_userdata('currentProject');
+		redirect('/home');
 	}
 	
 	public function changeProject() {
@@ -76,6 +81,12 @@ class Users extends CI_Controller {
 			$this->session->set_userdata('currentProject', $project->toArray());
 			echo "ok";		
 		}
+	}
+	
+	public function delete() {
+		$data = (array) json_decode($_POST['data']);
+		$user = $this->userModel->delete($data);
+		echo "ok";
 	}
 	
 	

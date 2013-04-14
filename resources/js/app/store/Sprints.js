@@ -10,7 +10,8 @@ Ext.define('ScrumTool.store.Sprints', {
 		api: {
 			create: 'sprints/save',
 			read: 'sprints/all',
-			update: 'sprints/save'
+			update: 'sprints/save',
+			destroy: 'sprints/delete'
 		},
 
 		reader: {

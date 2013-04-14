@@ -9,6 +9,14 @@ Ext.define('ScrumTool.store.Stories', {
 		this.load();
 	},
 	
+	  sorters: [{
+	         property: 'priority',
+	         direction: 'ASC'
+	    },{
+	         property: 'createdAt',
+	         direction: 'DESC'
+	     }],
+	
 	proxy: {
 		type: 'ajax',
 		method: 'post',
@@ -16,7 +24,8 @@ Ext.define('ScrumTool.store.Stories', {
 		api: {
 			create: 'stories/save',
 			read: 'stories/all',
-			update: 'stories/save'
+			update: 'stories/save',
+			destroy: 'stories/delete'
 		},
 		
 		reader: {

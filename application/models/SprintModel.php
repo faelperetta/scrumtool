@@ -64,7 +64,8 @@ class SprintModel extends CI_Model {
 		return $sprint;
 	}
 	
-	public function delete($sprint) {
+	public function delete($data) {
+		$sprint = $this->sprintDAO->findByPrimaryKey($data['id']);
 		$this->sprintDAO->delete($sprint);
 	}
 	

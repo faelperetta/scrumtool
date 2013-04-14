@@ -50,17 +50,16 @@ class StoryModel extends CI_Model {
 	
 	public function save($data) {
 		$story = $this->arrayToStory($data);
-		
-		$currentProject = $this->session->userdata('currentProject');
-		$project = new Project();
-		$project->setId($currentProject['id']);
-		$story->setProject($project);
-
 		$this->storyDAO->save($story);
 		
 		
 		return $story;
 		
+	}
+	
+	public function delete($data) {
+		$story = $this->storyDAO->findByPrimaryKey($data['id']);
+		$this->storyDAO->delete($story);
 	}
 	
 	public function findAvailable($projectId) {
@@ -77,8 +76,16 @@ class StoryModel extends CI_Model {
 		$story->setName($data['name']);
 		$story->setPoint($data['point']);
 		$story->setStatus($data['status']);
+		$story->setPriority($data['priority']);
+		
 		$story->setCreateAt(new DateTime());
-		$story->setUser($this->userDAO->findByPrimaryKey(1));		
+		
+		$user = $this->session->userdata('user');
+		
+		$story->setUser($this->userDAO->findByPrimaryKey($user['id']));		
+		
+		$currentProject = $this->session->userdata('currentProject');
+		$story->setProject($this->projectDAO->findByPrimaryKey($currentProject['id']));
 		
 		$story->setCategory($this->categoryDAO->findByPrimaryKey($data['category']));
 

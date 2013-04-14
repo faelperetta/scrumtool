@@ -30,7 +30,12 @@ Ext.define('ScrumTool.controller.Sprint', {
 			},
 			
 			'sprintgrid > toolbar > button[action=newSprint]': {
-				click: this.onNewSprint
+				click: this.onNewSprint,
+				render: function(me) {
+					if (this.application.currentUser.role == 'Time') {
+						me.setVisible(false);
+					}
+				}
 			},
 			
 			'editsprint': {
@@ -132,6 +137,7 @@ Ext.define('ScrumTool.controller.Sprint', {
 	
 	onRemoveSprint: function(grid, rowIndex, colIndex) {
 		this.getSprintsStore().removeAt(rowIndex);
+		this.getSprintsStore().sync();
 	},
 	
 	onShowBurndown: function() {
@@ -187,7 +193,14 @@ Ext.define('ScrumTool.controller.Sprint', {
                     size: 4,
                     radius: 4,
                     'stroke-width': 0
-                }
+                },
+                tips: {
+              	  width: 50,
+              	  height: 28,
+              	  renderer: function(storeItem, item) {
+              	    this.setTitle(Math.floor(storeItem.get('planned')));
+              	  }
+              	},
             }, {
                 type: 'line',
                 title: 'Realizado',
@@ -206,7 +219,7 @@ Ext.define('ScrumTool.controller.Sprint', {
                     'stroke-width': 0
                 },
                 tips: {
-                	  width: 140,
+                	  width: 50,
                 	  height: 28,
                 	  renderer: function(storeItem, item) {
                 	    this.setTitle(Math.floor(storeItem.get('done')));
@@ -221,6 +234,7 @@ Ext.define('ScrumTool.controller.Sprint', {
 		    height: 400,
 		    width: 600,
 		    layout: 'fit',
+		    modal: true,
 		    items: chart
 		}).show();
 	}

@@ -5,6 +5,7 @@ Ext.define('ScrumTool.view.ProjectGrid', {
 	title: 'Projetos',
 	id: 'projectGrid',
 	border: false,
+	closable: true,
 	
 	initComponent: function() {
 		var me = this;

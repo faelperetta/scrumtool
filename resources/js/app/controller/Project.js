@@ -58,5 +58,6 @@ Ext.define('ScrumTool.controller.Project', {
 	
 	onRemoveProject: function(grid, rowIndex, colIndex) {
 		grid.getStore().removeAt(rowIndex);
+		grid.getStore().sync();
 	}
 });

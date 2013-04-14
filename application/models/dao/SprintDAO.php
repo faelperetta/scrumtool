@@ -1,6 +1,8 @@
 <?php
 
 namespace models\dao;
+use models\entities\Sprint;
+
 use Doctrine\ORM\Query\ResultSetMapping;
 
 use models\dao\GenericDAO;

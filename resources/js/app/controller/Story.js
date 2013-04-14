@@ -16,7 +16,12 @@ Ext.define('ScrumTool.controller.Story', {
 			},
 			
 			'storygrid > toolbar > button[action=newStory]': {
-				click: this.onNewStory
+				click: this.onNewStory,
+				render: function(me) {
+					if (this.application.currentUser.role == 'Time') {
+						me.setVisible(false);
+					}
+				}
 			},
 			
 			'editstory > toolbar > button[action=save]': {
@@ -71,5 +76,6 @@ Ext.define('ScrumTool.controller.Story', {
 	
 	onRemoveStory: function(grid, rowIndex, colIndex) {
 		this.getStoriesStore().removeAt(rowIndex);
+		this.getStoriesStore().sync();
 	}
 });

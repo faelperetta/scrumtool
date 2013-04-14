@@ -156,6 +156,18 @@ class modelsentitiesStoryProxy extends \models\entities\Story implements \Doctri
         return parent::getUser();
     }
 
+    public function setPriority($priority)
+    {
+        $this->__load();
+        return parent::setPriority($priority);
+    }
+
+    public function getPriority()
+    {
+        $this->__load();
+        return parent::getPriority();
+    }
+
     public function toArray()
     {
         $this->__load();
@@ -165,7 +177,7 @@ class modelsentitiesStoryProxy extends \models\entities\Story implements \Doctri
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'description', 'status', 'point', 'createAt', 'category', 'sprint', 'project', 'user');
+        return array('__isInitialized__', 'id', 'name', 'description', 'status', 'point', 'createAt', 'category', 'sprint', 'project', 'user', 'priority');
     }
 
     public function __clone()

@@ -38,9 +38,9 @@ class GenerateBurndown {
 		
 		$currentDate = new DateTime();
 		$data = array();
-		for ($i = 0; $i < $totalOfDays; $i++) {
+		for ($i = 0; $i <= $totalOfDays; $i++) {
 			
-			$startDate->add(new DateInterval('P1D'));
+			
 			$day = $startDate->format('d/m/Y');
 			$data[$i]  = array(
 						'name' => $day,
@@ -56,6 +56,8 @@ class GenerateBurndown {
 				
 				$data[$i]['done'] = $totalOfHoursDone;								
 			}
+			
+			$startDate->add(new DateInterval('P1D'));
 			
 		}
 		

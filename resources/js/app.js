@@ -1,3 +1,4 @@
+var APP = null;
 Ext.Loader.setConfig({enabled:true});
 
 
@@ -14,6 +15,7 @@ Ext.application({
     
     launch: function() {
     	var me = this;
+    	APP = this;
     	
     	Ext.Ajax.request({
 			url: 'users/isLogged',
@@ -23,6 +25,7 @@ Ext.application({
 				} else {
 					var data = Ext.decode(response.responseText);
 					me.currentUser = data;
+					console.log(me.currentUser);
 					Ext.widget('scrumtool');					
 				}
 			}

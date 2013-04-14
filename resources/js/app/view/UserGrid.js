@@ -5,6 +5,7 @@ Ext.define('ScrumTool.view.UserGrid', {
 	title: 'Usuários',
 	id: 'userGrid',
 	border: false,
+	closable: true,
 	
 	initComponent: function() {
 		var me = this;

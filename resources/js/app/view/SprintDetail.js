@@ -26,10 +26,10 @@ Ext.define('ScrumTool.view.SprintDetail', {
 			                '<td>Pontos Completados</td>',
 			                 '<td class="value">3</td>',
 			            '</tr>',
-			            '<tr>',
+			            /*'<tr>',
 			                '<td>Dias Restantes</td>',
 			                '<td class="value">10</td>',                        
-			            '</tr>',                    
+			            '</tr>',  */                  
 			        '</table>',
 			    '</div>',
 			    {

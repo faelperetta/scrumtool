@@ -16,5 +16,8 @@ Ext.define('ScrumTool.model.User', {
 	}, {
 		name: 'projects',
 		persist: false
-	}]
+	}, {
+		name: 'role',
+		type: 'string'
+	}, 'projects']
 });

@@ -1,7 +1,7 @@
 <?php
 
 namespace models\entities;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project
 {
+	
+	public function __construct() {
+		$this->users = new ArrayCollection();
+	}
+	
     /**
      * @var integer $id
      *
@@ -42,6 +47,15 @@ class Project
      */
     private $createAt;
 
+    
+    /**
+     * @ManyToMany(targetEntity="User", cascade={"persist"})
+     * @JoinTable(name="project_user",
+     *      joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     */
+    private $users;
     
     public function setId($id) {
     	$this->id = $id;
@@ -115,6 +129,11 @@ class Project
     public function getCreateAt()
     {
         return $this->createAt;
+    }
+    
+    public function addUser(User $user) {
+    	//$user->addProject($this);
+    	$this->users->add($user);
     }
     
     public function toArray() {

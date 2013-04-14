@@ -1,7 +1,10 @@
 <?php
+use models\entities\Project;
+
 use models\entities\User;
 
 use models\dao\UserDAO;
+use models\dao\ProjectDAO;
 
 class UserModel extends CI_Model {
 	
@@ -10,6 +13,7 @@ class UserModel extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 		$this->userDAO = new UserDAO($this->doctrine->em);
+		$this->projectDAO = new ProjectDAO($this->doctrine->em);
 	}
 	
 	public function findAll() {
@@ -36,6 +40,16 @@ class UserModel extends CI_Model {
 		$user->setName($data['name']);
 		$user->setEmail($data['email']);
 		$user->setPassword($data['password']);
+		$user->setRole($data['role']);
+		
+		$projects = $data['projects'];
+		if (is_array($projects)) {
+			foreach ($projects as $projectStdClass) {
+				$projectArray = (array) $projectStdClass;
+				$project = $this->projectDAO->findByPrimaryKey($projectArray['id']); 
+				$user->addProject($project);
+			}
+		}
 		
 		return $user;
 	}
@@ -48,6 +62,11 @@ class UserModel extends CI_Model {
 		} else {
 			return null;
 		}
+	}
+	
+	public function delete($data) {
+		$user = $this->userDAO->findByPrimaryKey($data['id']);
+		$user = $this->userDAO->delete($user);
 	}
 	
 }

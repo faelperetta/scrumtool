@@ -12,7 +12,7 @@ class UserDAO extends GenericDAO {
 		return parent::findByPrimaryKey(self::$ENTITY, $id);
 	}
 	
-	public function save(User $user) {
+	public function save(User &$user) {
 		parent::save($user);
 	}
 	
@@ -32,7 +32,7 @@ class UserDAO extends GenericDAO {
 	}
 	
 	public function findByProject($projectId) {
-		$dql = "SELECT u FROM " . self::$ENTITY . " u JOIN u.projects p WHERE p = $projectId";
+		$dql = "SELECT u FROM " . self::$ENTITY . " u JOIN u.projects p WHERE p.id = $projectId";
 		$query = $this->entityManager->createQuery($dql);
 		$users = $query->getResult();
 		return $users;

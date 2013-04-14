@@ -34,9 +34,9 @@ Ext.define('ScrumTool.view.Viewport', {
 				xtype: 'toolbar',
 				height: 80,
 				items: [{
-					html: 'ScrumTool'
+					html: '<div style="font-size:26px">ScrumTool</div>'
 				}, {
-					html: 'empty',
+					html: '',
 					flex: 1
 				},{
 					xtype: 'combobox',
@@ -47,6 +47,9 @@ Ext.define('ScrumTool.view.Viewport', {
 					displayField: 'name',
 					store: Ext.create('ScrumTool.store.Projects', {data: []}),
 					queryMode: 'local'
+				},{
+					xtype:'container',
+					html: '<a href="users/logout">Sair</a>'
 				}/*, {
 					id: 'search',
                     name: 'search',

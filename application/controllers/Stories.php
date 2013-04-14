@@ -27,6 +27,11 @@ class Stories extends CI_Controller {
 		echo $this->utils->returnsSuccess($story);
 	}
 	
+	public function delete() {
+		$data = (array) json_decode($_POST['data']);
+		$story = $this->storyModel->delete($data);
+	}
+	
 	public function availables() {
 		$currentProject = $this->session->userdata('currentProject');
 		$stories = $this->storyModel->findAvailable($currentProject['id']);

@@ -96,6 +96,13 @@ class Story
      */
     private $user;
 
+    
+    /**
+     * @var integer $priority
+     *
+     * @Column(name="priority", type="integer", nullable=true)
+     */
+    private $priority; 
 
     public function setId($id) {
     	$this->id = $id;
@@ -292,6 +299,15 @@ class Story
     }
     
     
+    public function setPriority($priority) {
+    	$this->priority = $priority;
+    }
+    
+    public function getPriority() {
+    	return $this->priority;
+    }
+    
+    
     public function toArray() {
     	return array(
     			'id' => $this->getId(),
@@ -301,7 +317,8 @@ class Story
     			'point' => $this->getPoint(),
     			'createdAt' => $this->getCreateAt()->format('d/m/Y h:i:s'),
     			'user' => $this->getUser()->toArray(),
-    			'category' => $this->category->toArray()
+    			'category' => $this->category->toArray(),
+    			'priority' => $this->getPriority()
     	);
     }
 }

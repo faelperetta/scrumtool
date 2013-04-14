@@ -42,8 +42,13 @@ class ProjectModel extends CI_Model {
 		return $project;
 	}
 	
-	public function delete($project) {
+	public function delete($data) {
+		$project = $this->projectDAO->findByPrimaryKey($data['id']);
 		$this->projectDAO->delete($project);
+	}
+	
+	public function getStatistics($projectId) {
+		return $this->projectDAO->getStatistics($projectId);
 	}
 	
 }

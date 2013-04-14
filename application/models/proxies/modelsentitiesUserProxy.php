@@ -96,6 +96,24 @@ class modelsentitiesUserProxy extends \models\entities\User implements \Doctrine
         return parent::getProjects();
     }
 
+    public function setRole($role)
+    {
+        $this->__load();
+        return parent::setRole($role);
+    }
+
+    public function getRole()
+    {
+        $this->__load();
+        return parent::getRole();
+    }
+
+    public function addProject(\models\entities\Project $project)
+    {
+        $this->__load();
+        return parent::addProject($project);
+    }
+
     public function toArray()
     {
         $this->__load();
@@ -105,7 +123,7 @@ class modelsentitiesUserProxy extends \models\entities\User implements \Doctrine
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'email', 'password', 'projects');
+        return array('__isInitialized__', 'id', 'name', 'email', 'password', 'projects', 'role');
     }
 
     public function __clone()

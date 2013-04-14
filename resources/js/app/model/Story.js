@@ -1,7 +1,7 @@
 Ext.define('ScrumTool.model.Story', {
 	extend: 'Ext.data.Model',
 	
-	fields: ['id', 'name', 'description', 'status', 'point', 'createdAt', 'user',
+	fields: ['id', 'name', 'description', 'status', 'point', 'createdAt', 'user', 'priority',
 	    {
 			name: 'category',
 			convert: function(v) {

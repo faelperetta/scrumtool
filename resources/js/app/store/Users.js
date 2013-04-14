@@ -10,7 +10,8 @@ Ext.define('ScrumTool.store.Users', {
 		api: {
 			create: 'users/save',
 			read: 'users/all',
-			update: 'users/save'
+			update: 'users/save',
+			destroy: 'users/delete'
 		},
 		
 		reader: {

@@ -36,12 +36,20 @@ Ext.define('ScrumTool.view.SprintGrid', {
 				icon: 'resources/images/edit.png',
 				tooltip: 'Editar',
 				handler: function(grid, rowIndex, colIndex) {
+					if (APP.currentUser.role == 'Time') {
+						Ext.MessageBox.alert("Aviso", "Você não tem permissão para editar.");
+						return;
+					}
 					Ext.getCmp('sprintGrid').fireEvent('editsprint', grid, rowIndex, colIndex);
 				}
 			},{
 				icon: 'resources/images/delete.png',
 				tooltip: 'Excluir',
 				handler: function(grid, rowIndex, colIndex) {
+					if (APP.currentUser.role == 'Time') {
+						Ext.MessageBox.alert("Aviso", "Você não tem permissão para excluir.");
+						return;
+					}
 					Ext.MessageBox.confirm('Confirmar', 'Tem certeza que deseja excluir esta sprint?', function(btn) {
 						if (btn == 'yes') {
 							Ext.getCmp('sprintGrid').fireEvent('removesprint', grid, rowIndex, colIndex);							

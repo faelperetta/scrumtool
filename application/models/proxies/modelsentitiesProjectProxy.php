@@ -84,6 +84,12 @@ class modelsentitiesProjectProxy extends \models\entities\Project implements \Do
         return parent::getCreateAt();
     }
 
+    public function addUser(\models\entities\User $user)
+    {
+        $this->__load();
+        return parent::addUser($user);
+    }
+
     public function toArray()
     {
         $this->__load();
@@ -93,7 +99,7 @@ class modelsentitiesProjectProxy extends \models\entities\Project implements \Do
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'description', 'createAt');
+        return array('__isInitialized__', 'id', 'name', 'description', 'createAt', 'users');
     }
 
     public function __clone()

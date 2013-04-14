@@ -18,7 +18,7 @@ class GenericDAO {
 		return $this->entityManager->find($entity, $id);
 	}
 
-	public function save($entity) {
+	public function save(&$entity) {
 		$this->entityManager->merge($entity);
 		$this->entityManager->flush();
 	}

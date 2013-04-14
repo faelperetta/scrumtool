@@ -9,6 +9,7 @@ Ext.define('ScrumTool.view.StoryGrid', {
 	
 	store: 'Stories',
 	id: 'storyGrid',
+	closable: true,
 	
 	title: 'Product Backlog',
 	border: false,
@@ -57,6 +58,25 @@ Ext.define('ScrumTool.view.StoryGrid', {
 			text: 'Data',
 			dataIndex: 'createdAt',
 			width: 200
+		},{
+			text: 'Criado por',
+			dataIndex: 'user',
+			width: 200,
+			renderer: function(value) {
+				return value.name;
+			}
+		}, {
+			text: 'Prioridade',
+			dataIndex: 'priority',
+			renderer: function(value) {
+				if (value == 0) {
+					return "ALTA";
+				} else if (value == 1) {
+					return "MÉDIA";
+				} else {
+					return "BAIXA";
+				}
+			}
 		}, {
 			xtype: 'actioncolumn',
 			width: 45,
@@ -64,12 +84,21 @@ Ext.define('ScrumTool.view.StoryGrid', {
 				icon: 'resources/images/edit.png',
 				tooltip: 'Editar',
 				handler: function(grid, rowIndex, colIndex) {
+					if (APP.currentUser.role == 'Time') {
+						Ext.MessageBox.alert("Aviso", "Você não tem permissão para editar.");
+						return;
+					}
 					Ext.getCmp('storyGrid').fireEvent('editstory', grid, rowIndex, colIndex);
 				}
 			},{
 				icon: 'resources/images/delete.png',
 				tooltip: 'Excluir',
 				handler: function(grid, rowIndex, colIndex) {
+					if (APP.currentUser.role == 'Time') {
+						Ext.MessageBox.alert("Aviso", "Você não tem permissão para excluir.");
+						return;
+					}
+					
 					Ext.MessageBox.confirm('Confirmar', 'Tem certeza que deseja excluir este item do backlog?', function(btn) {
 						if (btn == 'yes') {
 							Ext.getCmp('storyGrid').fireEvent('removestory', grid, rowIndex, colIndex);							

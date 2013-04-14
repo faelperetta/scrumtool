@@ -16,7 +16,7 @@ Ext.define('ScrumTool.store.Menus', {
 		type: 'sprintmanagement'
 	}, {
 		id: 4,
-		name: 'Users',
+		name: 'Usuários',
 		type: 'usergrid'
 	}]
 });

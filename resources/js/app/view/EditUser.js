@@ -57,6 +57,7 @@ Ext.define('ScrumTool.view.EditUser', {
 				xtype: 'grid',
 				store: 'Projects',
 				title: 'Projetos',
+				id: 'gridUserProjects',
 				selModel:  Ext.create('Ext.selection.CheckboxModel'),
 				columns: [{
 					text: 'Projeto',

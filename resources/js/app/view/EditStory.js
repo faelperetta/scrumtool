@@ -60,6 +60,33 @@ Ext.define('ScrumTool.view.EditStory', {
 				defaults: {
 					padding:5
 				},
+				items: [{
+					xtype: 'label',
+					text: 'Prioridade:',
+					style: 'margin-top: 3px'
+				}, {
+					xtype: 'radio',
+					boxLabel: 'ALTA',
+					name: 'priority',
+					inputValue: 0
+				}, {
+					xtype: 'radio',
+					boxLabel: 'MÉDIA',
+					name: 'priority',
+					inputValue: 1
+				}, {
+					xtype: 'radio',
+					boxLabel: 'BAIXA',
+					name: 'priority',
+					inputValue: 2
+				}]
+					
+			}, {
+				xtype: 'container',
+				layout: 'hbox',
+				defaults: {
+					padding:5
+				},
 				
 				items: [{
 					xtype: 'label',

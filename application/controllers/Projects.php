@@ -27,4 +27,14 @@ class Projects extends CI_Controller {
 		echo $this->utils->returnsSuccess($project);
 	}
 	
+	public function statistics($id) {
+		echo json_encode($this->projectModel->getStatistics($id));
+	}
+	
+	public function delete() {
+		$data = (array) json_decode($_POST['data']);
+		$project = $this->projectModel->delete($data);
+		echo "ok";
+	}
+	
 }
